@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mint SBT - MIRZA ECOSYSTEM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/zH0cmJ4S/mirzalogo.png">
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a1128;
+            --accent: #00f0f0;
+            --text: #ffffff;
+            --success: #00f0f0;
+            --warning: #ffd166;
+            --error: #ef476f;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(135deg, #0a1128, #192d55);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Side Menu Bar */
+        .side-menu-container {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: rgba(10, 17, 40, 0.98);
+            backdrop-filter: blur(10px);
+            border-right: 2px solid rgba(0, 240, 240, 0.5);
+            z-index: 1000;
+            transition: left 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-shadow: 5px 0 30px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+
+        .side-menu-container.active {
+            left: 0;
+        }
+
+        .menu-header {
+            padding: 2rem 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(0, 240, 240, 0.3);
+            text-align: center;
+        }
+
+        .menu-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+
+        .menu-logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 15px rgba(0, 240, 240, 0.5);
+            overflow: hidden;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(0, 240, 240, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(0, 240, 240, 0.8), 0 0 35px rgba(0, 240, 240, 0.6);
+            }
+        }
+
+        .menu-logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .menu-brand {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            color: var(--accent);
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 240, 240, 0.5);
+        }
+
+        .menu-nav {
+            list-style: none;
+            padding: 1.5rem 0;
+        }
+
+        .menu-link {
+            display: block;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 240, 240, 0.1);
+        }
+
+        .menu-link:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: rgba(0, 240, 240, 0.1);
+            transition: width 0.3s ease;
+        }
+
+        .menu-link:hover:before {
+            width: 100%;
+        }
+
+        .menu-link:hover {
+            color: var(--accent);
+            padding-left: 2rem;
+        }
+
+        .menu-link.active {
+            color: var(--accent);
+            background: rgba(0, 240, 240, 0.15);
+            border-left: 4px solid var(--accent);
+        }
+
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 45px;
+            height: 45px;
+            background: rgba(10, 17, 40, 0.9);
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 240, 240, 0.3);
+        }
+
+        .menu-toggle:hover {
+            background: rgba(0, 240, 240, 0.1);
+            transform: scale(1.05);
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 25px;
+            background-color: var(--accent);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Smart Slide Bar */
+        .slide-bar {
+            background: linear-gradient(90deg, rgba(0, 240, 240, 0.1), rgba(0, 240, 240, 0.2), rgba(0, 240, 240, 0.1));
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0, 240, 240, 0.3);
+            overflow: hidden;
+            position: relative;
+            margin-top: 0;
+        }
+
+        .slide-content {
+            display: flex;
+            animation: slide 25s linear infinite;
+            white-space: nowrap;
+        }
+
+        .slide-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 0 2rem;
+            color: var(--accent);
+            font-weight: 700;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+        }
+
+        .slide-badge {
+            background: rgba(0, 240, 240, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid var(--accent);
+            font-size: 0.8rem;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(0, 240, 240, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(0, 240, 240, 0.6);
+            }
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .slide-bar:hover .slide-content {
+            animation-play-state: paused;
+        }
+
+        /* Mint Page Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.4s ease;
+        }
+        
+        .container.menu-open {
+            transform: translateX(280px);
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 3rem;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #00f0f0;
+            box-shadow: 0 0 30px rgba(0, 240, 240, 0.7);
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #00f0f0;
+            text-shadow: 0 0 20px rgba(0, 240, 240, 0.8);
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .mint-interface {
+            background: linear-gradient(135deg, rgba(10, 17, 40, 0.95), rgba(25, 45, 85, 0.95));
+            border: 2px solid #00f0f0;
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 15px 50px rgba(0, 240, 240, 0.4);
+            backdrop-filter: blur(10px);
+            animation: containerGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes containerGlow {
+            0%, 100% {
+                box-shadow: 0 15px 50px rgba(0, 240, 240, 0.4);
+            }
+            50% {
+                box-shadow: 0 20px 60px rgba(0, 240, 240, 0.6), 0 0 80px rgba(0, 240, 240, 0.3);
+            }
+        }
+
+        .mint-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+            align-items: stretch;
+        }
+
+        .step-card {
+            background: rgba(0, 240, 240, 0.1);
+            border: 1px solid rgba(0, 240, 240, 0.3);
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 380px;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            background: rgba(0, 240, 240, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 240, 240, 0.3);
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #0080ff);
+        }
+
+        .step-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+
+        .step-title {
+            font-family: 'Orbitron', monospace;
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .step-description {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .mint-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #00f0f0, #0080ff);
+            color: #0a1128;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 240, 240, 0.5);
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: auto;
+            min-height: 55px;
+            animation: buttonGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes buttonGlow {
+            0%, 100% {
+                box-shadow: 0 8px 25px rgba(0, 240, 240, 0.5);
+            }
+            50% {
+                box-shadow: 0 12px 30px rgba(0, 240, 240, 0.7), 0 0 50px rgba(0, 240, 240, 0.4);
+            }
+        }
+        
+        .mint-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 240, 240, 0.7);
+        }
+
+        .mint-button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            animation: none;
+        }
+
+        .mint-button.connected {
+            background: linear-gradient(135deg, #00c8c8, #0080ff);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+        .status-info {
+            background: rgba(0, 240, 240, 0.05);
+            border: 1px solid rgba(0, 240, 240, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .status-success {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .status-warning {
+            color: var(--warning);
+        }
+
+        .status-error {
+            color: var(--error);
+        }
+
+        .info-section {
+            background: rgba(0, 240, 240, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 240, 240, 0.2);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-title {
+            font-family: 'Orbitron', monospace;
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .info-list {
+            list-style: none;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .info-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 240, 240, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-list li:before {
+            content: '•';
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .wallet-info {
+            background: rgba(0, 240, 240, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .wallet-info.active {
+            display: block;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 240, 240, 0.2);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .wallet-action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .wallet-action-button {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--accent);
+            background: rgba(0, 240, 240, 0.1);
+            color: var(--accent);
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .wallet-action-button:hover {
+            background: rgba(0, 240, 240, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* NFT Display Section */
+        .nft-display-section {
+            background: rgba(0, 240, 240, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 240, 240, 0.2);
+            padding: 2rem;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .nft-display-section.active {
+            display: block;
+        }
+
+        .nft-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .nft-image {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.5), 0 0 0 2px rgba(0, 240, 240, 0.3);
+            border: 1px solid rgba(0, 240, 240, 0.3);
+        }
+
+        .nft-title {
+            font-family: 'Orbitron', monospace;
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 240, 240, 0.4);
+        }
+
+        .nft-description {
+            color: var(--accent);
+            font-weight: 700;
+            text-align: center;
+            max-width: 400px;
+            line-height: 1.4;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        .main-footer {
+            background: rgba(10, 17, 40, 0.95);
+            border-top: 2px solid rgba(0, 240, 240, 0.5);
+            padding: 3rem 0;
+            margin-top: 4rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--bg);
+            transform: translateY(-3px);
+        }
+
+        .social-icon {
+            width: 20px;
+            height: 20px;
+            filter: brightness(0) invert(1);
+        }
+
+        .social-link:hover .social-icon {
+            filter: brightness(0) saturate(100%);
+        }
+
+        .ecosystem-text {
+            color: #00f0f0;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .mirza-text {
+            color: #00f0f0;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-family: 'Orbitron', monospace;
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .title {
+                font-size: 2.8rem;
+            }
+            
+            .mint-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .mint-interface {
+                padding: 2.5rem;
+            }
+            
+            .step-card {
+                min-height: 360px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .side-menu-container {
+                width: 250px;
+                left: -250px;
+            }
+            
+            .container.menu-open {
+                transform: translateX(250px);
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            
+            .title {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+            
+            .mint-interface {
+                padding: 2rem;
+                border-radius: 20px;
+            }
+            
+            .mint-steps {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .step-card {
+                min-height: 340px;
+                padding: 1.5rem 1rem;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .nft-image {
+                width: 240px;
+                height: 240px;
+            }
+
+            .slide-item {
+                gap: 1rem;
+                padding: 0 1.5rem;
+                font-size: 0.8rem;
+            }
+
+            .slide-badge {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.6rem;
+            }
+            
+            .wallet-action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+            
+            .logo {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .mint-interface {
+                padding: 1.5rem;
+                border-radius: 15px;
+            }
+            
+            .step-card {
+                padding: 1rem;
+                min-height: 320px;
+            }
+            
+            .step-title {
+                font-size: 1.2rem;
+            }
+            
+            .step-description {
+                font-size: 0.9rem;
+            }
+            
+            .mint-button {
+                font-size: 0.9rem;
+                padding: 0.8rem 1.2rem;
+            }
+            
+            .info-section {
+                padding: 1.5rem;
+            }
+            
+            .info-title {
+                font-size: 1.3rem;
+            }
+            
+            .nft-image {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .menu-toggle {
+                width: 40px;
+                height: 40px;
+                top: 15px;
+                left: 15px;
+            }
+            
+            .menu-toggle span {
+                width: 20px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .title {
+                font-size: 1.6rem;
+            }
+            
+            .step-card {
+                min-height: 300px;
+            }
+            
+            .step-title {
+                font-size: 1.1rem;
+            }
+            
+            .mint-button {
+                font-size: 0.85rem;
+                padding: 0.7rem 1rem;
+            }
+            
+            .slide-item {
+                font-size: 0.7rem;
+                gap: 0.8rem;
+                padding: 0 1rem;
+            }
+            
+            .slide-badge {
+                font-size: 0.6rem;
+                padding: 0.2rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Side Menu Bar -->
+    <div class="side-menu-container" id="sideMenu">
+        <div class="menu-header">
+            <a href="index.html" class="menu-logo">
+                <div class="menu-logo-img">
+                    <img src="https://i.ibb.co/zH0cmJ4S/mirzalogo.png" alt="MIRZA Logo">
+                </div>
+                <span class="menu-brand">MIRZA</span>
+            </a>
+        </div>
+        <ul class="menu-nav">
+            <li><a href="index.html" class="menu-link">Home</a></li>
+            <li><a href="mint.html" class="menu-link active">Mint SBT</a></li>
+            <li><a href="defi.html" class="menu-link">DeFi</a></li>
+            <li><a href="ecosystem.html" class="menu-link">Ecosystem</a></li>
+            <li><a href="roadmap.html" class="menu-link">Roadmap</a></li>
+        </ul>
+    </div>
+
+    <!-- Menu Toggle Button -->
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Smart Slide Bar -->
+    <div class="slide-bar">
+        <div class="slide-content">
+            <div class="slide-item">
+                <span class="slide-badge">NEW</span>
+                <span>🎉 MIRZA SBT CELEBRATION IS LIVE! JOIN THE FESTIVITY 🎉</span>
+            </div>
+            <div class="slide-item">
+                <span class="slide-badge">HOT</span>
+                <span>🚀 LIMITED TIME OFFER - MINT YOUR SBT NOW! 🚀</span>
+            </div>
+            <div class="slide-item">
+                <span class="slide-badge">UPDATE</span>
+                <span>⭐ EXCLUSIVE REWARDS FOR EARLY SUPPORTERS ⭐</span>
+            </div>
+            <div class="slide-item">
+                <span class="slide-badge">ALERT</span>
+                <span>🎊 SPECIAL CELEBRATION BONUSES AVAILABLE 🎊</span>
+            </div>
+            <div class="slide-item">
+                <span class="slide-badge">TRENDING</span>
+                <span>🔥 OVER 10,000 SBTs MINTED IN CELEBRATION! 🔥</span>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="slide-item">
+                <span class="slide-badge">NEW</span>
+                <span>🎉 MIRZA SBT CELEBRATION IS LIVE! JOIN THE FESTIVITY 🎉</span>
+            </div>
+            <div class="slide-item">
+                <span class="slide-badge">HOT</span>
+                <span>🚀 LIMITED TIME OFFER - MINT YOUR SBT NOW! 🚀</span>
+            </div>
+            <div class="slide-item">
+                <span class="slide-badge">UPDATE</span>
+                <span>⭐ EXCLUSIVE REWARDS FOR EARLY SUPPORTERS ⭐</span>
+            </div>
+            <div class="slide-item">
+                <span class="slide-badge">ALERT</span>
+                <span>🎊 SPECIAL CELEBRATION BONUSES AVAILABLE 🎊</span>
+            </div>
+            <div class="slide-item">
+                <span class="slide-badge">TRENDING</span>
+                <span>🔥 OVER 10,000 SBTs MINTED IN CELEBRATION! 🔥</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mint Page Content -->
+    <div class="container" id="mainContainer">
+        <div class="header">
+            <div class="logo">
+                <img src="https://i.ibb.co/zH0cmJ4S/mirzalogo.png" alt="MIRZA Logo">
+            </div>
+            <h1 class="title"><span class="ecosystem-text">MINT YOUR SBT</span></h1>
+        </div>
+        
+        <div class="mint-interface">
+            <h2 style="text-align: center; color: var(--accent); margin-bottom: 2rem; font-family: 'Orbitron', monospace; font-size: 2.2rem;">
+                SOULBOUND TOKEN MINTING PORTAL
+            </h2>
+            
+            <p style="text-align: center; color: var(--text); font-size: 1.2rem; margin-bottom: 3rem; line-height: 1.6;">
+                <strong>Mint your unique Soulbound Token (SBT) to access the full <span style="color: #00f0f0;">MIRZA ECOSYSTEM</span></strong><br>
+                <strong>Follow these simple steps to get started</strong>
+            </p>
+
+            <!-- Wallet Connection Info -->
+            <div class="wallet-info" id="walletInfo">
+                <div class="info-row">
+                    <div class="small muted">Account:</div>
+                    <div class="small" id="shortAddr">—</div>
+                </div>
+                <div class="info-row">
+                    <div class="small muted">Network:</div>
+                    <div class="small" id="networkInfo">—</div>
+                </div>
+                <div class="info-row">
+                    <div class="small muted">Status:</div>
+                    <div class="small status-success" id="connectionStatus">Connected</div>
+                </div>
+                <div class="wallet-action-buttons">
+                    <button class="wallet-action-button" id="addTokenBtn">Add MIRZA to Wallet</button>
+                    <button class="wallet-action-button" id="disconnectBtn">Disconnect Wallet</button>
+                </div>
+            </div>
+            
+            <div class="mint-steps">
+                <!-- Step 1: Connect Wallet -->
+                <div class="step-card">
+                    <div class="step-number">01</div>
+                    <h3 class="step-title">CONNECT WALLET</h3>
+                    <p class="step-description">Connect your Web3 wallet to begin the minting process</p>
+                    <button class="mint-button" id="connectWalletBtn">
+                        CONNECT WALLET
+                    </button>
+                    <div class="status-info" id="walletStatus">
+                        Wallet not connected
+                    </div>
+                </div>
+                
+                <!-- Step 2: Get Test Tokens -->
+                <div class="step-card">
+                    <div class="step-number">02</div>
+                    <h3 class="step-title">GET TEST TOKENS</h3>
+                    <p class="step-description">Claim free <span class="mirza-text">MIRZA</span> test tokens from our faucet</p>
+                    <button class="mint-button" id="faucetBtn" disabled>
+                        CLAIM TEST TOKENS
+                    </button>
+                    <div class="status-info" id="faucetStatus">
+                        Connect wallet first
+                    </div>
+                </div>
+                
+                <!-- Step 3: Approve Tokens -->
+                <div class="step-card">
+                    <div class="step-number">03</div>
+                    <h3 class="step-title">APPROVE TOKENS</h3>
+                    <p class="step-description">Approve <span class="mirza-text">MIRZA</span> tokens for SBT minting</p>
+                    <button class="mint-button" id="approveBtn" disabled>
+                        APPROVE TOKEN
+                    </button>
+                    <div class="status-info" id="approveStatus">
+                        Tokens not approved
+                    </div>
+                </div>
+                
+                <!-- Step 4: Mint SBT -->
+                <div class="step-card">
+                    <div class="step-number">04</div>
+                    <h3 class="step-title">MINT SBT</h3>
+                    <p class="step-description">Mint your unique Soulbound Token</p>
+                    <button class="mint-button" id="mintBtn" disabled>
+                        MINT SBT
+                    </button>
+                    <div class="status-info" id="mintStatus">
+                        Ready to mint
+                    </div>
+                </div>
+            </div>
+
+            <!-- NFT Display Section -->
+            <div class="nft-display-section" id="nftDisplaySection">
+                <h3 class="info-title">YOUR SOULBOUND NFT</h3>
+                <div class="nft-preview">
+                    <div id="emptyState" class="empty-state">
+                        <div class="empty-state-icon">◼</div>
+                        <div style="font-size: 1.1rem; margin-bottom: 0.5rem;">NO NFT MINTED YET</div>
+                        <div style="color: var(--accent);">MINT YOUR SBT TO SEE IT HERE</div>
+                    </div>
+                    <img id="nftImage" class="nft-image" src="" alt="MIRZA SBT" style="display:none">
+                    <div id="nftTitle" class="nft-title" style="display:none"></div>
+                    <div id="nftDesc" class="nft-description" style="display:none"></div>
+                </div>
+            </div>
+            
+            <!-- Important Information Section -->
+            <div class="info-section">
+                <h3 class="info-title">IMPORTANT INFORMATION</h3>
+                <ul class="info-list">
+                    <li>SBTs are <strong>NON-TRANSFERABLE</strong> and permanently linked to your wallet</li>
+                    <li>Each wallet address can mint only <strong>ONE SBT</strong></li>
+                    <li>SBT provides access to exclusive ecosystem benefits and governance rights</li>
+                    <li>Minting requires <strong>8 <span class="mirza-text">MIRZA</span> TOKENS</strong> (currently on Sepolia Testnet)</li>
+                    <li>Your SBT will be visible across all <span class="mirza-text">MIRZA</span> platforms</li>
+                    <li>SBT metadata is stored securely on IPFS</li>
+                </ul>
+            </div>
+
+            <!-- Network Info -->
+            <div style="background: rgba(0, 240, 240, 0.1); border-radius: 10px; padding: 1.5rem; margin-top: 2rem; text-align: center;">
+                <h4 style="color: var(--accent); font-family: 'Orbitron', monospace; margin-bottom: 0.5rem;">NETWORK INFORMATION</h4>
+                <p style="color: var(--text); font-size: 0.9rem;">
+                    <strong>CURRENT NETWORK:</strong> SEPOLIA TESTNET | 
+                    <strong>TOKEN STANDARD:</strong> ERC-721 SBT | 
+                    <strong>MINT PRICE:</strong> 8 <span class="mirza-text">MIRZA</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968823.png" alt="Twitter" class="social-icon">
+                    TWITTER
+                </a>
+                <a href="https://discord.gg/YmVjJxgq9g" target="_blank" class="social-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord" class="social-icon">
+                    DISCORD
+                </a>
+                <a href="#" class="social-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968846.png" alt="Github" class="social-icon">
+                    GITHUB
+                </a>
+            </div>
+            <p>© 2023 <span class="ecosystem-text">MIRZA ECOSYSTEM</span> ALL RIGHTS RESERVED</p>
+            <p>BUILT FOR THE <span class="mirza-text">MIRZA</span> COMMUNITY</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function setupMobileMenu() {
+            const menuToggle = document.getElementById('menuToggle');
+            const sideMenu = document.getElementById('sideMenu');
+            const mainContainer = document.getElementById('mainContainer');
+            const menuLinks = document.querySelectorAll('.menu-link');
+            
+            menuToggle.addEventListener('click', function() {
+                sideMenu.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+                mainContainer.classList.toggle('menu-open');
+            });
+            
+            // Close menu when a link is clicked
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    sideMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    mainContainer.classList.remove('menu-open');
+                });
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsideMenu = sideMenu.contains(event.target);
+                const isClickOnToggle = menuToggle.contains(event.target);
+                
+                if (!isClickInsideMenu && !isClickOnToggle && sideMenu.classList.contains('active')) {
+                    sideMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    mainContainer.classList.remove('menu-open');
+                }
+            });
+        }
+
+        /* ---------- CONFIG ---------- */
+        const MIRZA_TOKEN = "0xEf6A9AA442191Ecdb7B1Dd26DBE727DBA6731E16";
+        const FAUCET_CONTRACT = "0xdD3276784F8A116C29b3C768Fd7A5DFebc811B19";
+        const SBT_CONTRACT = "0x0D0D98E79773ADA350Aecda63A3Fd868452fb59C";
+        const MIRZA_DECIMALS = 18;
+        const MINT_PRICE = "8";
+        const FAUCET_AMOUNT = "10";
+        const FAUCET_COOLDOWN_SECONDS = 24 * 3600;
+        const IPFS_GATEWAY = "https://ipfs.io/ipfs/";
+
+        const SEPOLIA_CHAIN_ID = "0xaa36a7";
+        const SEPOLIA_CONFIG = {
+            chainId: SEPOLIA_CHAIN_ID,
+            chainName: "Sepolia Testnet",
+            nativeCurrency: {
+                name: "Sepolia Ether",
+                symbol: "ETH",
+                decimals: 18
+            },
+            rpcUrls: ["https://eth-sepolia.g.alchemy.com/v2/demo"],
+            blockExplorerUrls: ["https://sepolia.etherscan.io"]
+        };
+
+        /* ---------- ABIs ---------- */
+        const ERC20_ABI = [
+            "function approve(address spender, uint256 amount) external returns (bool)",
+            "function allowance(address owner, address spender) view returns (uint256)",
+            "function balanceOf(address owner) view returns (uint256)",
+            "function decimals() view returns (uint8)"
+        ];
+
+        const FAUCET_ABI = [
+            "function claim() external",
+            "function canClaim(address user) view returns (bool)",
+            "function lastClaimedAt(address) view returns (uint256)",
+            "function cooldownSeconds() view returns (uint256)"
+        ];
+
+        const SBT_ABI = [
+            "function mint() external",
+            "function tokenURI(uint256 tokenId) public view returns (string)",
+            "function totalSupply() public view returns (uint256)",
+            "function ownerOf(uint256 tokenId) public view returns (address)",
+            "function hasMinted(address) public view returns (bool)"
+        ];
+
+        /* ---------- UI elements ---------- */
+        const connectWalletBtn = document.getElementById("connectWalletBtn");
+        const faucetBtn = document.getElementById("faucetBtn");
+        const approveBtn = document.getElementById("approveBtn");
+        const mintBtn = document.getElementById("mintBtn");
+        const addTokenBtn = document.getElementById("addTokenBtn");
+        const disconnectBtn = document.getElementById("disconnectBtn");
+        
+        const walletStatus = document.getElementById("walletStatus");
+        const faucetStatus = document.getElementById("faucetStatus");
+        const approveStatus = document.getElementById("approveStatus");
+        const mintStatus = document.getElementById("mintStatus");
+        
+        const walletInfo = document.getElementById("walletInfo");
+        const shortAddr = document.getElementById("shortAddr");
+        const networkInfo = document.getElementById("networkInfo");
+        const connectionStatus = document.getElementById("connectionStatus");
+
+        const nftDisplaySection = document.getElementById("nftDisplaySection");
+        const nftImage = document.getElementById("nftImage");
+        const nftTitle = document.getElementById("nftTitle");
+        const nftDesc = document.getElementById("nftDesc");
+        const emptyState = document.getElementById("emptyState");
+
+        /* ---------- state ---------- */
+        let provider, signer, userAddress;
+        let erc20, faucet, sbt;
+        let faucetTimerInterval = null;
+        let allowancePollInterval = null;
+        let hasMintedSBT = false;
+        let isProcessing = false;
+
+        /* ---------- helpers ---------- */
+        function shortAddress(addr){
+            if(!addr) return "—";
+            return addr.slice(0,6) + "..." + addr.slice(-4);
+        }
+
+        function setStatus(element, msg, type = "default"){
+            element.innerText = msg;
+            element.className = "status-info";
+            if(type === "success") element.classList.add("status-success");
+            if(type === "warning") element.classList.add("status-warning");
+            if(type === "error") element.classList.add("status-error");
+        }
+
+        function toBN(nStr, decimals = MIRZA_DECIMALS){
+            return ethers.utils.parseUnits(nStr, decimals);
+        }
+
+        function fromBN(bn, decimals = MIRZA_DECIMALS){
+            try{ return parseFloat(ethers.utils.formatUnits(bn, decimals)); }catch(e){ return 0; }
+        }
+
+        function setLoadingState(loading) {
+            if (loading) {
+                document.body.classList.add('loading');
+                isProcessing = true;
+            } else {
+                document.body.classList.remove('loading');
+                isProcessing = false;
+            }
+        }
+
+        /* ---------- Add Token to Wallet ---------- */
+        async function addTokenToWallet() {
+            if (!window.ethereum) {
+                alert("Please install MetaMask to add tokens to your wallet.");
+                return;
+            }
+
+            try {
+                const wasAdded = await window.ethereum.request({
+                    method: 'wallet_watchAsset',
+                    params: {
+                        type: 'ERC20',
+                        options: {
+                            address: MIRZA_TOKEN,
+                            symbol: 'MIRZA',
+                            decimals: 18,
+                            image: 'https://i.ibb.co/zH0cmJ4S/mirzalogo.png',
+                        },
+                    },
+                });
+
+                if (wasAdded) {
+                    alert('MIRZA token successfully added to your wallet!');
+                } else {
+                    alert('MIRZA token was not added to your wallet.');
+                }
+            } catch (error) {
+                console.error("Error adding token to wallet:", error);
+                alert('There was an error adding the token to your wallet.');
+            }
+        }
+
+        /* ---------- network switching ---------- */
+        async function switchToSepolia() {
+            if (!window.ethereum) {
+                setStatus(walletStatus, "METAMASK NOT FOUND", "error");
+                return false;
+            }
+
+            try {
+                setStatus(walletStatus, "SWITCHING TO SEPOLIA NETWORK...", "warning");
+                
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: SEPOLIA_CHAIN_ID }],
+                });
+                
+                setStatus(walletStatus, "SUCCESSFULLY SWITCHED TO SEPOLIA", "success");
+                return true;
+            } catch (switchError) {
+                if (switchError.code === 4902) {
+                    try {
+                        setStatus(walletStatus, "ADDING SEPOLIA NETWORK...", "warning");
+                        
+                        await window.ethereum.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [SEPOLIA_CONFIG],
+                        });
+                        
+                        setStatus(walletStatus, "SEPOLIA NETWORK ADDED SUCCESSFULLY", "success");
+                        return true;
+                    } catch (addError) {
+                        console.error("Error adding Sepolia network:", addError);
+                        setStatus(walletStatus, "FAILED TO ADD SEPOLIA NETWORK", "error");
+                        return false;
+                    }
+                } else {
+                    console.error("Error switching to Sepolia:", switchError);
+                    setStatus(walletStatus, "FAILED TO SWITCH TO SEPOLIA", "error");
+                    return false;
+                }
+            }
+        }
+
+        async function ensureSepoliaNetwork() {
+            if (!window.ethereum) return false;
+            
+            try {
+                const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+                
+                if (chainId !== SEPOLIA_CHAIN_ID) {
+                    return await switchToSepolia();
+                }
+                
+                return true;
+            } catch (error) {
+                console.error("Error checking chain ID:", error);
+                return false;
+            }
+        }
+
+        /* ---------- wallet connection ---------- */
+        async function connectWallet(){
+            if (isProcessing) return;
+            
+            if(!window.ethereum){ 
+                setStatus(walletStatus, "PLEASE INSTALL METAMASK", "error");
+                return; 
+            }
+            
+            setLoadingState(true);
+            
+            try {
+                const networkSwitched = await ensureSepoliaNetwork();
+                if (!networkSwitched) {
+                    setStatus(walletStatus, "PLEASE SWITCH TO SEPOLIA NETWORK MANUALLY", "error");
+                    setLoadingState(false);
+                    return;
+                }
+                
+                provider = new ethers.providers.Web3Provider(window.ethereum);
+                await provider.send("eth_requestAccounts", []);
+                signer = provider.getSigner();
+                userAddress = await signer.getAddress();
+                erc20 = new ethers.Contract(MIRZA_TOKEN, ERC20_ABI, signer);
+                faucet = new ethers.Contract(FAUCET_CONTRACT, FAUCET_ABI, signer);
+                sbt = new ethers.Contract(SBT_CONTRACT, SBT_ABI, signer);
+
+                // Update UI
+                connectWalletBtn.innerText = "CONNECTED";
+                connectWalletBtn.classList.add("connected");
+                connectWalletBtn.disabled = true;
+                
+                shortAddr.innerText = shortAddress(userAddress);
+                walletInfo.classList.add("active");
+                nftDisplaySection.classList.add("active");
+                setStatus(walletStatus, "WALLET CONNECTED SUCCESSFULLY", "success");
+                setStatus(connectionStatus, "CONNECTED", "success");
+                
+                await updateNetwork();
+                enableButtonsAfterConnect();
+                startAllowancePolling();
+                await refreshFaucetState();
+                await refreshApprovalState();
+                await refreshMintState();
+                await checkAndDisableMintButtons();
+                await displayNFTIfOwned();
+
+                // Event listeners
+                window.ethereum.on("accountsChanged", accounts => {
+                    if(accounts.length === 0) { 
+                        disconnectWallet(); 
+                    } else { 
+                        location.reload(); 
+                    }
+                });
+                
+                window.ethereum.on("chainChanged", chainId => {
+                    if (chainId !== SEPOLIA_CHAIN_ID) {
+                        setStatus(walletStatus, "PLEASE SWITCH BACK TO SEPOLIA NETWORK", "error");
+                        disableAllActionButtons();
+                    } else {
+                        location.reload();
+                    }
+                });
+            } catch (error) {
+                console.error("Connection error:", error);
+                setStatus(walletStatus, "CONNECTION FAILED", "error");
+            } finally {
+                setLoadingState(false);
+            }
+        }
+
+        function disconnectWallet(){
+            signer = null;
+            provider = null;
+            userAddress = null;
+            erc20 = faucet = sbt = null;
+            
+            connectWalletBtn.innerText = "CONNECT WALLET";
+            connectWalletBtn.classList.remove("connected");
+            connectWalletBtn.disabled = false;
+            
+            walletInfo.classList.remove("active");
+            nftDisplaySection.classList.remove("active");
+            setStatus(walletStatus, "WALLET NOT CONNECTED");
+            stopAllowancePolling();
+            stopFaucetTimer();
+            disableAllActionButtons();
+            hideNFT();
+        }
+
+        /* ---------- network info ---------- */
+        async function updateNetwork(){
+            try{
+                const net = await provider.getNetwork();
+                networkInfo.innerText = net.name ? `${net.name} (chain ${net.chainId})` : `Chain ${net.chainId}`;
+            }catch(e){
+                networkInfo.innerText = "UNKNOWN";
+            }
+        }
+
+        /* ---------- faucet logic ---------- */
+        async function refreshFaucetState(){
+            if(!faucet || !userAddress){ 
+                setStatus(faucetStatus, "NOT CONNECTED");
+                faucetBtn.disabled = true; 
+                return; 
+            }
+            
+            try{
+                let canClaim = false;
+                try{
+                    canClaim = await faucet.canClaim(userAddress);
+                }catch(e){
+                    const last = await faucet.lastClaimedAt(userAddress);
+                    const cd = await faucet.cooldownSeconds();
+                    const next = last.toNumber() + cd.toNumber();
+                    canClaim = (Math.floor(Date.now()/1000) >= next);
+                }
+
+                if(canClaim){
+                    faucetBtn.disabled = false;
+                    setStatus(faucetStatus, "READY TO CLAIM TEST TOKENS", "success");
+                    stopFaucetTimer();
+                } else {
+                    const last = await faucet.lastClaimedAt(userAddress);
+                    const cd = await faucet.cooldownSeconds();
+                    const lastTs = last.toNumber();
+                    const cdSec = cd.toNumber() || FAUCET_COOLDOWN_SECONDS;
+                    const nextTs = lastTs + cdSec;
+                    startFaucetCountdown(nextTs);
+                }
+            }catch(e){
+                console.error("faucet state err", e);
+                setStatus(faucetStatus, "FAUCET STATUS UNKNOWN", "error");
+                faucetBtn.disabled = false;
+            }
+        }
+
+        async function claimFaucet(){
+            if (isProcessing) return;
+            
+            if(!faucet || !signer) {
+                setStatus(faucetStatus, "CONNECT WALLET FIRST", "error");
+                return;
+            }
+            
+            setLoadingState(true);
+            
+            try {
+                const networkSwitched = await ensureSepoliaNetwork();
+                if (!networkSwitched) {
+                    setStatus(faucetStatus, "PLEASE SWITCH TO SEPOLIA NETWORK FIRST", "error");
+                    return;
+                }
+                
+                faucetBtn.disabled = true;
+                setStatus(faucetStatus, "CLAIMING 10 MIRZA...", "warning");
+                const tx = await faucet.claim();
+                await tx.wait();
+                setStatus(faucetStatus, "10 MIRZA TOKENS CLAIMED SUCCESSFULLY", "success");
+                await refreshFaucetState();
+                await refreshApprovalState();
+            }catch(e){
+                console.error(e);
+                setStatus(faucetStatus, "FAUCET CLAIM FAILED", "error");
+                await refreshFaucetState();
+            } finally {
+                setLoadingState(false);
+            }
+        }
+
+        function startFaucetCountdown(nextTs){
+            stopFaucetTimer();
+            faucetBtn.disabled = true;
+            const update = ()=> {
+                const now = Math.floor(Date.now()/1000);
+                const diff = nextTs - now;
+                if(diff <= 0){
+                    setStatus(faucetStatus, "READY TO CLAIM TEST TOKENS", "success");
+                    faucetBtn.disabled = false;
+                    stopFaucetTimer();
+                    return;
+                }
+                const hh = Math.floor(diff/3600);
+                const mm = Math.floor((diff%3600)/60);
+                const ss = diff%60;
+                setStatus(faucetStatus, `NEXT CLAIM IN: ${hh}H ${mm}M ${ss}S`, "warning");
+            };
+            update();
+            faucetTimerInterval = setInterval(update, 1000);
+        }
+
+        function stopFaucetTimer(){ 
+            if(faucetTimerInterval){ 
+                clearInterval(faucetTimerInterval); 
+                faucetTimerInterval=null; 
+            } 
+        }
+
+        /* ---------- approval & mint ---------- */
+        async function refreshApprovalState(){
+            if(!erc20 || !sbt || !userAddress){ 
+                setStatus(approveStatus, "—");
+                approveBtn.disabled=true; 
+                return; 
+            }
+            
+            try{
+                const minted = await sbt.hasMinted(userAddress);
+                if(minted){
+                    hasMintedSBT = true;
+                    approveBtn.disabled = true;
+                    mintBtn.disabled = true;
+                    setStatus(approveStatus, "ALREADY MINTED - NO APPROVAL NEEDED", "success");
+                    setStatus(mintStatus, "ALREADY MINTED", "success");
+                    return;
+                }
+
+                const allowance = await erc20.allowance(userAddress, SBT_CONTRACT);
+                const allowanceNum = fromBN(allowance);
+                setStatus(approveStatus, `ALLOWANCE: ${allowanceNum} MIRZA`);
+                
+                if(allowanceNum >= Number(MINT_PRICE)){
+                    approveBtn.disabled = true;
+                    mintBtn.disabled = false;
+                    setStatus(approveStatus, "8 MIRZA TOKENS APPROVED FOR MINTING", "success");
+                } else {
+                    approveBtn.disabled = false;
+                    mintBtn.disabled = true;
+                }
+            }catch(e){
+                console.error("allow err", e);
+                setStatus(approveStatus, "ALLOWANCE: UNKNOWN", "error");
+                approveBtn.disabled=false;
+                mintBtn.disabled = true;
+            }
+        }
+
+        async function checkAndDisableMintButtons(){
+            if(!sbt || !userAddress) return;
+            
+            try{
+                const minted = await sbt.hasMinted(userAddress);
+                if(minted){
+                    hasMintedSBT = true;
+                    approveBtn.disabled = true;
+                    mintBtn.disabled = true;
+                    setStatus(approveStatus, "ALREADY MINTED - NO APPROVAL NEEDED", "success");
+                    setStatus(mintStatus, "ALREADY MINTED", "success");
+                    setStatus(walletStatus, "YOU HAVE ALREADY MINTED YOUR SBT", "success");
+                }
+            }catch(e){
+                console.error("Error checking mint status:", e);
+            }
+        }
+
+        async function startAllowancePolling(){
+            stopAllowancePolling();
+            await refreshApprovalState();
+            allowancePollInterval = setInterval(refreshApprovalState, 10000);
+        }
+
+        function stopAllowancePolling(){ 
+            if(allowancePollInterval){ 
+                clearInterval(allowancePollInterval); 
+                allowancePollInterval=null; 
+            } 
+        }
+
+        async function approveTokens(){
+            if (isProcessing) return;
+            
+            if(!erc20 || !signer) {
+                setStatus(approveStatus, "CONNECT WALLET FIRST", "error");
+                return;
+            }
+            
+            setLoadingState(true);
+            
+            try {
+                const networkSwitched = await ensureSepoliaNetwork();
+                if (!networkSwitched) {
+                    setStatus(approveStatus, "PLEASE SWITCH TO SEPOLIA NETWORK FIRST", "error");
+                    return;
+                }
+                
+                approveBtn.disabled = true;
+                setStatus(approveStatus, "SENDING APPROVE TRANSACTION...", "warning");
+                const tx = await erc20.approve(SBT_CONTRACT, toBN(MINT_PRICE));
+                await tx.wait();
+                setStatus(approveStatus, "APPROVED 8 MIRZA", "success");
+                await refreshApprovalState();
+            }catch(e){
+                console.error(e);
+                setStatus(approveStatus, "APPROVAL FAILED", "error");
+                approveBtn.disabled = false;
+            } finally {
+                setLoadingState(false);
+            }
+        }
+
+        async function refreshMintState(){
+            if(!sbt || !userAddress) { 
+                setStatus(mintStatus, "NOT CONNECTED");
+                mintBtn.disabled=true; 
+                return; 
+            }
+            
+            try{
+                const minted = await sbt.hasMinted(userAddress);
+                if(minted){
+                    hasMintedSBT = true;
+                    setStatus(mintStatus, "ALREADY MINTED", "success");
+                    mintBtn.disabled = true;
+                    approveBtn.disabled = true;
+                    setStatus(approveStatus, "ALREADY MINTED - NO APPROVAL NEEDED", "success");
+                } else {
+                    setStatus(mintStatus, "READY TO MINT");
+                    const allowance = await erc20.allowance(userAddress, SBT_CONTRACT);
+                    const allowanceNum = fromBN(allowance);
+                    mintBtn.disabled = !(allowanceNum >= Number(MINT_PRICE));
+                }
+            }catch(e){
+                console.error("mintState err", e);
+                setStatus(mintStatus, "STATUS UNKNOWN", "error");
+                mintBtn.disabled = true;
+            }
+        }
+
+        async function mintSBT(){
+            if (isProcessing) return;
+            
+            if(!sbt || !signer) {
+                setStatus(mintStatus, "CONNECT WALLET FIRST", "error");
+                return;
+            }
+            
+            setLoadingState(true);
+            
+            try {
+                const networkSwitched = await ensureSepoliaNetwork();
+                if (!networkSwitched) {
+                    setStatus(mintStatus, "PLEASE SWITCH TO SEPOLIA NETWORK FIRST", "error");
+                    return;
+                }
+                
+                mintBtn.disabled = true;
+                setStatus(mintStatus, "MINTING SBT...", "warning");
+                const tx = await sbt.mint();
+                await tx.wait();
+                setStatus(mintStatus, "SBT MINTED SUCCESSFULLY! WELCOME TO MIRZA ECOSYSTEM", "success");
+                hasMintedSBT = true;
+                await refreshMintState();
+                await displayNFTIfOwned();
+                
+                approveBtn.disabled = true;
+                mintBtn.disabled = true;
+                setStatus(approveStatus, "ALREADY MINTED - NO APPROVAL NEEDED", "success");
+                setStatus(mintStatus, "ALREADY MINTED", "success");
+                
+                setTimeout(() => {
+                    alert('CONGRATULATIONS! YOUR SOULBOUND TOKEN HAS BEEN MINTED SUCCESSFULLY. YOU NOW HAVE ACCESS TO ALL MIRZA ECOSYSTEM FEATURES.');
+                }, 500);
+            }catch(e){
+                console.error(e);
+                setStatus(mintStatus, "MINT FAILED", "error");
+                mintBtn.disabled = false;
+            } finally {
+                setLoadingState(false);
+            }
+        }
+
+        /* ---------- NFT Display Functions ---------- */
+        async function displayNFTIfOwned(){
+            if(!sbt || !provider || !userAddress) return;
+            try{
+                const total = await sbt.totalSupply();
+                const totalNum = total.toNumber();
+                if(totalNum === 0){ hideNFT(); return; }
+
+                // iterate tokens (1..total) to find owner
+                for(let i=1;i<=totalNum;i++){
+                    try{
+                        const owner = await sbt.ownerOf(i);
+                        if(owner.toLowerCase() === userAddress.toLowerCase()){
+                            // fetch tokenURI and metadata
+                            let uri = await sbt.tokenURI(i);
+                            if(uri.startsWith("ipfs://")) uri = uri.replace("ipfs://", IPFS_GATEWAY);
+                            const resp = await fetch(uri);
+                            if(!resp.ok) { console.warn("meta fetch failed", resp.status); continue; }
+                            const meta = await resp.json();
+                            let image = meta.image || meta.image_url || null;
+                            if(!image){ console.warn("no image in metadata"); continue; }
+                            if(image.startsWith("ipfs://")) image = image.replace("ipfs://", IPFS_GATEWAY);
+                            
+                            // show NFT
+                            nftImage.src = image;
+                            nftImage.style.display = "block";
+                            nftTitle.innerText = meta.name || "MIRZA SBT";
+                            nftTitle.style.display = "block";
+                            nftDesc.innerText = meta.description || "";
+                            nftDesc.style.display = "block";
+                            emptyState.style.display = "none";
+                            return;
+                        }
+                    }catch(err){
+                        // ownerOf might revert for non-existent token -> skip
+                        continue;
+                    }
+                }
+                hideNFT();
+            }catch(e){
+                console.error(e);
+                hideNFT();
+            }
+        }
+
+        function hideNFT(){
+            nftImage.style.display = "none";
+            nftTitle.style.display = "none";
+            nftDesc.style.display = "none";
+            emptyState.style.display = "flex";
+        }
+
+        /* ---------- UI helpers ---------- */
+        function enableButtonsAfterConnect(){
+            faucetBtn.disabled = false;
+            if(!hasMintedSBT){
+                approveBtn.disabled = false;
+            } else {
+                approveBtn.disabled = true;
+                mintBtn.disabled = true;
+            }
+        }
+
+        function disableAllActionButtons(){
+            faucetBtn.disabled = true;
+            approveBtn.disabled = true;
+            mintBtn.disabled = true;
+        }
+
+        /* ---------- event listeners ---------- */
+        connectWalletBtn.addEventListener("click", connectWallet);
+        faucetBtn.addEventListener("click", claimFaucet);
+        approveBtn.addEventListener("click", approveTokens);
+        mintBtn.addEventListener("click", mintSBT);
+        addTokenBtn.addEventListener("click", addTokenToWallet);
+        disconnectBtn.addEventListener("click", disconnectWallet);
+
+        /* ---------- initial state ---------- */
+        disableAllActionButtons();
+        setStatus(walletStatus, "PLEASE CONNECT YOUR WALLET TO INTERACT");
+
+        // Initialize mobile menu
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMobileMenu();
+        });
+
+        /* ---------- expose for debugging ---------- */
+        window.__mirza = {
+            connectWallet, disconnectWallet, refreshFaucetState, refreshApprovalState, displayNFTIfOwned
+        };
+    </script>
+</body>
+</html>
