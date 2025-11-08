@@ -14,6 +14,7 @@
     <link href="https://fonts.cdnfonts.com/css/momo-trust" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="https://i.ibb.co/QjcgRzkB/mizpp.png">
     <style>
+        /* All your existing CSS styles remain unchanged */
         * {
             margin: 0;
             padding: 0;
@@ -2493,8 +2494,8 @@
                 
                 <form class="newsletter-form" id="newsletterForm">
                     <div class="newsletter-input-group">
-                        <input type="text" class="newsletter-input" placeholder="Your Name" required>
-                        <input type="email" class="newsletter-input" placeholder="Your Email Address" required>
+                        <input type="text" class="newsletter-input" name="user_name" placeholder="Your Name" required>
+                        <input type="email" class="newsletter-input" name="user_email" placeholder="Your Email Address" required>
                     </div>
                     
                     <div class="newsletter-checkbox">
@@ -2733,31 +2734,74 @@
             });
         }
 
-        // Newsletter functionality
+        // Newsletter functionality with EmailJS integration
         function setupNewsletter() {
             const newsletterForm = document.getElementById('newsletterForm');
             const newsletterSuccess = document.getElementById('newsletterSuccess');
+            
+            // Initialize EmailJS with your public key
+            (function() {
+                emailjs.init("WUsD-SKJRnGzdX95K");
+            })();
             
             newsletterForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
                 // Get form data
                 const formData = new FormData(newsletterForm);
-                const name = formData.get('name') || 'Subscriber';
+                const name = formData.get('user_name');
+                const email = formData.get('user_email');
                 
-                // In a real implementation, you would send this data to your server
-                // For now, we'll just show the success message
+                // Show loading state
+                const submitButton = newsletterForm.querySelector('.newsletter-button');
+                const originalText = submitButton.innerHTML;
+                submitButton.innerHTML = '<span class="small-word">SUBSCRIBING...</span>';
+                submitButton.disabled = true;
                 
-                // Hide form and show success message
-                newsletterForm.style.display = 'none';
-                newsletterSuccess.style.display = 'block';
-                
-                // Optional: Reset form after a delay
-                setTimeout(() => {
+                // Send email using EmailJS
+                emailjs.send("service_tusis6b", "template_q97e8w1", {
+                    user_name: name,
+                    user_email: email,
+                    to_email: email
+                })
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    
+                    // Send admin notification
+                    return emailjs.send("service_tusis6b", "template_3s29dsf", {
+                        user_name: name,
+                        user_email: email,
+                        admin_email: "admin@mirzaecosystem.com" // Replace with your admin email
+                    });
+                })
+                .then(function(response) {
+                    console.log('Admin notification sent!', response.status, response.text);
+                    
+                    // Hide form and show success message
+                    newsletterForm.style.display = 'none';
+                    newsletterSuccess.style.display = 'block';
+                    
+                    // Reset form
                     newsletterForm.reset();
-                    newsletterForm.style.display = 'flex';
-                    newsletterSuccess.style.display = 'none';
-                }, 5000);
+                    
+                    // Reset button state
+                    submitButton.innerHTML = originalText;
+                    submitButton.disabled = false;
+                    
+                    // Optional: Hide success message after a delay and show form again
+                    setTimeout(() => {
+                        newsletterForm.style.display = 'flex';
+                        newsletterSuccess.style.display = 'none';
+                    }, 8000);
+                })
+                .catch(function(error) {
+                    console.log('FAILED...', error);
+                    alert('There was an error subscribing. Please try again.');
+                    
+                    // Reset button state on error
+                    submitButton.innerHTML = originalText;
+                    submitButton.disabled = false;
+                });
             });
         }
 
@@ -2780,39 +2824,6 @@
             setupSearch();
             setupNewsletter();
         });
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-(function() {
-  emailjs.init("WUsD-SKJRnGzdX95K"); // তোমার Public Key
-})();
-
-document.getElementById('newsletter-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  const userEmail = document.getElementById('email').value;
-  const responseEl = document.getElementById('response');
-
-  // প্রথমে Admin Notification পাঠানো হবে
-  emailjs.send("service_tusis6b", "template_3s29dsf", {
-    email: userEmail
-  });
-
-  // তারপর User Auto Reply পাঠানো হবে
-  emailjs.send("service_tusis6b", "template_q97e8w1", {
-    email: userEmail
-  })
-  .then(function() {
-    responseEl.innerHTML = "✅ Thanks! Check your inbox.";
-    responseEl.style.color = "#00ffff"; // MIRZA Ecosystem Neon tone
-    document.getElementById('newsletter-form').reset();
-  })
-  .catch(function(error) {
-    console.error("EmailJS Error:", error);
-    responseEl.innerHTML = "❌ Something went wrong. Please try again.";
-    responseEl.style.color = "#ff5555";
-  });
-});
-</script>
+    </script>
 </body>
 </html>
-
