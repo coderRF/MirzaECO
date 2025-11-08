@@ -56,6 +56,80 @@
             position: relative;
         }
 
+        /* Cascade Animation Container */
+        .cascade-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .cascade-word {
+            position: absolute;
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            text-transform: uppercase;
+            opacity: 0;
+            text-shadow: 0 0 10px currentColor;
+            animation: cascadeFall 15s linear infinite;
+        }
+
+        @keyframes cascadeFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Individual word animations with delays */
+        .cascade-word:nth-child(1) { animation-delay: 0s; left: 5%; }
+        .cascade-word:nth-child(2) { animation-delay: 1s; left: 15%; }
+        .cascade-word:nth-child(3) { animation-delay: 2s; left: 25%; }
+        .cascade-word:nth-child(4) { animation-delay: 3s; left: 35%; }
+        .cascade-word:nth-child(5) { animation-delay: 4s; left: 45%; }
+        .cascade-word:nth-child(6) { animation-delay: 5s; left: 55%; }
+        .cascade-word:nth-child(7) { animation-delay: 6s; left: 65%; }
+        .cascade-word:nth-child(8) { animation-delay: 7s; left: 75%; }
+        .cascade-word:nth-child(9) { animation-delay: 8s; left: 85%; }
+        .cascade-word:nth-child(10) { animation-delay: 9s; left: 95%; }
+        .cascade-word:nth-child(11) { animation-delay: 10s; left: 10%; }
+        .cascade-word:nth-child(12) { animation-delay: 11s; left: 20%; }
+        .cascade-word:nth-child(13) { animation-delay: 12s; left: 30%; }
+        .cascade-word:nth-child(14) { animation-delay: 13s; left: 40%; }
+        .cascade-word:nth-child(15) { animation-delay: 14s; left: 50%; }
+
+        /* Word Colors */
+        .mirza-ecosystem-color { color: var(--ecosystem-green); }
+        .mirza-chain-color { color: var(--chain-white); }
+        .mrz-coin-color { color: var(--coin-gold); }
+        .mirza-defi-color { color: var(--defi-green); }
+        .mirza-roadmap-color { color: var(--future-gold); }
+        .mirza-sbt-color { color: var(--soulbound-cyan); }
+        .mirza-nft-color { color: var(--nft-white); }
+        .mirza-dao-color { color: var(--accent); }
+        .mirza-marketplace-color { color: var(--festival-pink); }
+        .sepolia-color { color: var(--sepolia-blue); }
+        .blockchain-color { color: var(--blockchain-white); }
+        .web3-color { color: var(--identity-green); }
+        .decentralized-color { color: var(--early-diamond); }
+        .innovation-color { color: var(--celebration-yellow); }
+        .future-color { color: var(--future-gold); }
+
         /* Simplified MIRZA Text */
         .mirza-text {
             font-family: 'Josefin Sans', sans-serif;
@@ -263,6 +337,49 @@
 
         .small-word {
             font-weight: 700 !important;
+            display: inline-block;
+        }
+
+        /* Updated Quick Link Text Colors */
+        .quick-link-mint {
+            color: var(--future-gold) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .quick-link-sbt {
+            color: var(--future-gold) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .quick-link-small-text {
+            color: var(--defi-green) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .defi-platform-text {
+            color: var(--defi-green) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .defi-small-text {
+            color: var(--future-gold) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .ecosystem-small-text {
+            color: var(--future-gold) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .roadmap-small-text {
+            color: var(--ecosystem-green) !important;
+            font-weight: 700;
             display: inline-block;
         }
 
@@ -543,6 +660,7 @@
             overflow: hidden;
             position: relative;
             margin-top: 0;
+            z-index: 10;
         }
 
         .slide-content {
@@ -1174,6 +1292,11 @@
             .benefit-text {
                 font-size: 1rem;
             }
+            
+            /* Adjust cascade animation for mobile */
+            .cascade-word {
+                font-size: clamp(1rem, 2.5vw, 1.5rem);
+            }
         }
 
         @media (max-width: 576px) {
@@ -1360,6 +1483,25 @@
     </style>
 </head>
 <body>
+    <!-- Cascade Animation -->
+    <div class="cascade-container">
+        <div class="cascade-word mirza-ecosystem-color">MIRZA ECOSYSTEM</div>
+        <div class="cascade-word mirza-chain-color">MIRZA CHAIN</div>
+        <div class="cascade-word mrz-coin-color">MRZ COIN</div>
+        <div class="cascade-word mirza-defi-color">MIRZA DeFi</div>
+        <div class="cascade-word mirza-roadmap-color">MIRZA ROADMAP</div>
+        <div class="cascade-word mirza-sbt-color">MIRZA SBT</div>
+        <div class="cascade-word mirza-nft-color">MIRZA NFT</div>
+        <div class="cascade-word mirza-dao-color">MIRZA DAO</div>
+        <div class="cascade-word mirza-marketplace-color">MIRZA NFT MARKETPLACE</div>
+        <div class="cascade-word sepolia-color">SEPOLIA</div>
+        <div class="cascade-word blockchain-color">BLOCKCHAIN</div>
+        <div class="cascade-word web3-color">WEB3</div>
+        <div class="cascade-word decentralized-color">DECENTRALIZED</div>
+        <div class="cascade-word innovation-color">INNOVATION</div>
+        <div class="cascade-word future-color">FUTURE</div>
+    </div>
+
     <!-- Side Menu Bar -->
     <div class="side-menu-container" id="sideMenu">
         <div class="menu-header">
@@ -1555,29 +1697,29 @@
                 <div class="quick-link-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="Mint SBT">
                 </div>
-                <h3 class="quick-link-title"><span class="mint-text">MINT</span> <span class="soulbound-text">SBT</span></h3>
-                <p class="quick-link-description"><span class="small-word">Join</span> <span class="small-word">the</span> <span class="sepolia-text">Sepolia launch</span> - <span class="small-word">Get</span> <span class="small-word">your</span> <span class="unique-text">unique</span> <span class="soulbound-text">Soulbound Token</span></p>
+                <h3 class="quick-link-title"><span class="quick-link-mint">MINT</span> <span class="quick-link-sbt">SBT</span></h3>
+                <p class="quick-link-description"><span class="quick-link-small-text">Join</span> <span class="quick-link-small-text">the</span> <span class="sepolia-text">Sepolia launch</span> - <span class="quick-link-small-text">Get</span> <span class="quick-link-small-text">your</span> <span class="unique-text">unique</span> <span class="soulbound-text">Soulbound Token</span></p>
             </a>
             <a href="defi.html" class="quick-link-card">
                 <div class="quick-link-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="DeFi Platform">
                 </div>
-                <h3 class="quick-link-title"><span class="defi-text">DeFi</span> <span class="platform-text">PLATFORM</span></h3>
-                <p class="quick-link-description"><span class="explore-text">Explore</span> <span class="defi-text">decentralized finance</span> <span class="feature-text-word">features</span></p>
+                <h3 class="quick-link-title"><span class="defi-text">DeFi</span> <span class="defi-platform-text">PLATFORM</span></h3>
+                <p class="quick-link-description"><span class="defi-small-text">Explore</span> <span class="defi-text">decentralized finance</span> <span class="defi-small-text">features</span></p>
             </a>
             <a href="ecosystem.html" class="quick-link-card">
                 <div class="quick-link-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="Ecosystem">
                 </div>
                 <h3 class="quick-link-title"><span class="ecosystem-text">ECOSYSTEM</span></h3>
-                <p class="quick-link-description"><span class="discover-text">Discover</span> <span class="small-word">our</span> <span class="small-word">full</span> <span class="platform-text">platform</span> <span class="offering-text">offerings</span></p>
+                <p class="quick-link-description"><span class="ecosystem-small-text">Discover</span> <span class="ecosystem-small-text">our</span> <span class="ecosystem-small-text">full</span> <span class="platform-text">platform</span> <span class="ecosystem-small-text">offerings</span></p>
             </a>
             <a href="roadmap.html" class="quick-link-card">
                 <div class="quick-link-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="Roadmap">
                 </div>
                 <h3 class="quick-link-title"><span class="roadmap-text">ROADMAP</span></h3>
-                <p class="quick-link-description"><span class="see-text">See</span> <span class="small-word">our</span> <span class="small-word">exciting</span> <span class="future-text">future</span> <span class="small-word">plans</span></p>
+                <p class="quick-link-description"><span class="roadmap-small-text">See</span> <span class="roadmap-small-text">our</span> <span class="roadmap-small-text">exciting</span> <span class="future-text">future</span> <span class="roadmap-small-text">plans</span></p>
             </a>
         </div>
         
@@ -1619,7 +1761,7 @@
                     
                     <div class="newsletter-benefits">
                         <div class="benefit-item">
-                            <div class="benefit-icon">🚀</div>
+                            <div class="benefit-icon">🔓</div>
                             <div class="benefit-text">
                                 <span class="small-word">Early</span> <span class="early-text">access</span> <span class="small-word">to</span> <span class="small-word">new</span> <span class="feature-text-word">features</span>
                             </div>
