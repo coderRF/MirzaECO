@@ -6,9 +6,13 @@
     <title>MIRZA ECOSYSTEM - Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@400;600;700&family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@400;600;700&family=Matisse+ITC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Copperplate+Gothic+Bold&display=swap" rel="stylesheet">
+    <!-- Add Josefin Sans font -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Add Momo Trust font -->
+    <link href="https://fonts.cdnfonts.com/css/momo-trust" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="https://i.ibb.co/QjcgRzkB/mizpp.png">
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -52,250 +56,69 @@
             position: relative;
         }
 
-        /* Enhanced MIRZA Text with Josefin Sans Font and Color Changing Effect */
+        /* Simplified MIRZA Text */
         .mirza-text {
             font-family: 'Josefin Sans', sans-serif;
             font-weight: 700;
             text-transform: uppercase;
             font-size: clamp(1rem, 4vw, 1.2em);
-            -webkit-text-stroke: 0.3px rgba(255, 255, 255, 0.8);
-            text-stroke: 0.3px rgba(255, 255, 255, 0.8);
-            background: linear-gradient(
-                90deg,
-                #ff6b6b,
-                #4ecdc4,
-                #00f0f0,
-                #96ceb4,
-                #feca57,
-                #ff9ff3,
-                #54a0ff,
-                #00f0f0
-            );
-            background-size: 400% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: mirzaColorChange 8s ease-in-out infinite, mirzaGlow 3s ease-in-out infinite alternate, deltaWave 2.2s ease-in-out infinite;
+            color: #00f0f0;
             display: inline-block;
-            position: relative;
         }
 
-        @keyframes mirzaColorChange {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            25% {
-                background-position: 50% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            75% {
-                background-position: 50% 50%;
-            }
-        }
-
-        @keyframes mirzaGlow {
-            from {
-                text-shadow: 0 0 15px rgba(255, 107, 107, 0.7), 0 0 25px rgba(78, 205, 196, 0.5);
-            }
-            to {
-                text-shadow: 0 0 20px rgba(255, 107, 107, 0.9), 0 0 30px rgba(78, 205, 196, 0.7), 0 0 40px rgba(69, 183, 209, 0.5);
-            }
-        }
-
-        @keyframes deltaWave {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            25% {
-                transform: translateY(-5px);
-            }
-            50% {
-                transform: translateY(0px);
-            }
-            75% {
-                transform: translateY(5px);
-            }
-        }
-
-        /* Custom M letter for MIRZA with Josefin Sans Font - Enhanced Bright Cyan */
+        /* Custom M letter for MIRZA */
         .mirza-first-letter {
             font-family: 'Josefin Sans', sans-serif;
             font-weight: 700;
-            background: linear-gradient(
-                90deg,
-                #ff6b6b,
-                #4ecdc4,
-                #00f0f0,
-                #1a237e,
-                #96ceb4,
-                #00f0f0
-            );
-            background-size: 400% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            -webkit-text-stroke: 0.3px rgba(255, 255, 255, 0.8);
-            text-stroke: 0.3px rgba(255, 255, 255, 0.8);
+            color: #00f0f0;
             font-size: clamp(1.1rem, 4.5vw, 1.3em);
             display: inline-block;
-            position: relative;
-            animation: mirzaFirstLetterColor 8s ease-in-out infinite, mirzaFirstLetterGlow 3s ease-in-out infinite alternate, deltaWave 2.2s ease-in-out infinite;
         }
 
-        @keyframes mirzaFirstLetterColor {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            25% {
-                background-position: 50% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            75% {
-                background-position: 50% 50%;
-            }
-        }
-
-        @keyframes mirzaFirstLetterGlow {
-            from {
-                text-shadow: 
-                    0 0 15px rgba(255, 107, 107, 0.7), 
-                    0 0 25px rgba(78, 205, 196, 0.5),
-                    0 0 35px rgba(0, 240, 240, 0.7),
-                    0 0 35px rgba(26, 35, 126, 0.5);
-            }
-            to {
-                text-shadow: 
-                    0 0 20px rgba(255, 107, 107, 0.9), 
-                    0 0 30px rgba(78, 205, 196, 0.7),
-                    0 0 40px rgba(0, 240, 240, 0.9),
-                    0 0 50px rgba(26, 35, 126, 0.5);
-            }
-        }
-
-        /* Enhanced Sepolia Text - Changed to Bright White */
+        /* Simplified Sepolia Text */
         .sepolia-text {
             color: var(--bright-white) !important;
             font-weight: 900 !important;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-family: 'Orbitron', monospace;
-            text-shadow: 0 0 15px var(--bright-white), 0 0 25px var(--bright-white);
-            animation: sepoliaPulse 4s ease-in-out infinite, deltaWave 2.2s ease-in-out infinite;
             display: inline-block;
-            position: relative;
         }
 
-        @keyframes sepoliaPulse {
-            0%, 100% {
-                text-shadow: 0 0 15px var(--bright-white), 0 0 25px var(--bright-white);
-            }
-            50% {
-                text-shadow: 0 0 20px var(--bright-white), 0 0 35px var(--bright-white), 0 0 45px var(--bright-white);
-            }
-        }
-
-        /* Enhanced NOW ON Text */
+        /* Simplified NOW ON Text */
         .now-on-text {
             color: var(--accent) !important;
             font-weight: 900 !important;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-family: 'Orbitron', monospace;
-            text-shadow: 0 0 15px var(--accent), 0 0 25px var(--accent);
-            animation: nowOnPulse 4s ease-in-out infinite, deltaWave 2.2s ease-in-out infinite;
             display: inline-block;
-            position: relative;
         }
 
-        @keyframes nowOnPulse {
-            0%, 100% {
-                text-shadow: 0 0 15px var(--accent), 0 0 25px var(--accent);
-            }
-            50% {
-                text-shadow: 0 0 20px var(--accent), 0 0 35px var(--accent), 0 0 45px var(--accent);
-            }
-        }
-
-        /* Enhanced ECOSYSTEM Text with Digital Font and Delta Wave */
+        /* Simplified ECOSYSTEM Text */
         .ecosystem-text {
             color: var(--ecosystem-green) !important;
             font-weight: 900 !important;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-family: 'Orbitron', monospace;
-            text-shadow: 0 0 15px var(--ecosystem-green), 0 0 25px var(--ecosystem-green);
-            animation: ecosystemPulse 4s ease-in-out infinite, deltaWave 2.2s ease-in-out infinite;
             display: inline-block;
-            position: relative;
         }
 
-        @keyframes ecosystemPulse {
-            0%, 100% {
-                text-shadow: 0 0 15px var(--ecosystem-green), 0 0 25px var(--ecosystem-green);
-            }
-            50% {
-                text-shadow: 0 0 20px var(--ecosystem-green), 0 0 35px var(--ecosystem-green), 0 0 45px var(--ecosystem-green);
-            }
-        }
-
-        /* Enhanced Soulbound Text */
-        .soulbound-text {
-            color: var(--soulbound-cyan) !important;
+        /* Simplified Festival Text */
+        .festival-text {
+            font-family: 'Momo Trust', sans-serif;
             font-weight: 700;
-            text-shadow: 0 0 15px var(--soulbound-cyan), 0 0 25px var(--soulbound-cyan);
-            animation: soulboundPulse 2s ease-in-out infinite, deltaWave 2.2s ease-in-out infinite;
-            display: inline-block;
+            color: var(--festival-pink) !important;
         }
 
-        @keyframes soulboundPulse {
-            0%, 100% {
-                text-shadow: 0 0 15px var(--soulbound-cyan), 0 0 25px var(--soulbound-cyan);
-            }
-            50% {
-                text-shadow: 0 0 20px var(--soulbound-cyan), 0 0 35px var(--soulbound-cyan), 0 0 45px var(--soulbound-cyan);
-            }
-        }
-
-        /* Enhanced NFT Text */
-        .nft-text {
-            color: var(--nft-white) !important;
-            font-weight: 700;
-            text-shadow: 0 0 15px var(--nft-white), 0 0 25px var(--nft-white);
-            animation: nftGlow 4s ease-in-out infinite alternate, deltaWave 2.2s ease-in-out infinite;
-            display: inline-block;
-        }
-
-        @keyframes nftGlow {
-            from {
-                text-shadow: 0 0 15px var(--nft-white), 0 0 25px var(--nft-white);
-            }
-            to {
-                text-shadow: 0 0 20px var(--nft-white), 0 0 35px var(--nft-white), 0 0 45px var(--nft-white);
-            }
-        }
-
-        /* Enhanced Logo Glows */
+        /* Simplified Logos */
         .logo {
             width: clamp(80px, 20vw, 100px);
             height: clamp(80px, 20vw, 100px);
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid #00f0f0;
-            box-shadow: 0 0 40px rgba(0, 240, 240, 0.9);
-            animation: logoFloat 4s ease-in-out infinite, logoGlowEnhanced 3s ease-in-out infinite;
-        }
-
-        @keyframes logoGlowEnhanced {
-            0%, 100% {
-                box-shadow: 0 0 40px rgba(0, 240, 240, 0.9), 0 0 60px rgba(0, 240, 240, 0.6);
-            }
-            50% {
-                box-shadow: 0 0 60px rgba(0, 240, 240, 1), 0 0 80px rgba(0, 240, 240, 0.8), 0 0 100px rgba(0, 240, 240, 0.5);
-            }
         }
 
         .menu-logo-img {
@@ -303,9 +126,7 @@
             height: clamp(40px, 10vw, 50px);
             border-radius: 50%;
             border: 2px solid var(--accent);
-            box-shadow: 0 0 25px rgba(0, 240, 240, 0.8);
             overflow: hidden;
-            animation: logoGlowEnhanced 3s ease-in-out infinite;
         }
 
         .menu-logo-img img {
@@ -321,8 +142,7 @@
             border-radius: 50%;
             overflow: hidden;
             border: 2px solid #00f0f0;
-            box-shadow: 0 0 30px rgba(0, 240, 240, 0.9);
-            animation: titleLogoSpin 4s linear infinite, logoGlowEnhanced 3s ease-in-out infinite;
+            flex-shrink: 0;
         }
 
         .feature-logo {
@@ -331,9 +151,7 @@
             border-radius: 50%;
             overflow: hidden;
             border: 2px solid #00f0f0;
-            box-shadow: 0 0 25px rgba(0, 240, 240, 0.8);
             flex-shrink: 0;
-            animation: featureLogoPulse 2s ease-in-out infinite, logoGlowEnhanced 3s ease-in-out infinite;
         }
 
         .button-logo {
@@ -342,8 +160,6 @@
             border-radius: 50%;
             overflow: hidden;
             border: 2px solid #0a1128;
-            box-shadow: 0 0 20px rgba(0, 240, 240, 0.8);
-            animation: logoGlowEnhanced 3s ease-in-out infinite;
         }
 
         .quick-link-logo {
@@ -352,22 +168,105 @@
             border-radius: 50%;
             overflow: hidden;
             border: 2px solid var(--accent);
-            box-shadow: 0 0 25px rgba(0, 240, 240, 0.8);
             margin: 0 auto 1rem auto;
-            animation: logoPulse 3s ease-in-out infinite, logoGlowEnhanced 3s ease-in-out infinite;
         }
 
-        .newsletter-logo {
-            width: clamp(40px, 10vw, 50px);
-            height: clamp(40px, 10vw, 50px);
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--accent);
-            box-shadow: 0 0 30px rgba(0, 240, 240, 0.9);
-            animation: titleLogoSpin 4s linear infinite, logoGlowEnhanced 3s ease-in-out infinite;
+        /* Simplified Text Styles */
+        .celebration-text {
+            color: var(--celebration-yellow) !important;
+            font-weight: 700;
         }
 
-        /* Updated Button Styles */
+        .platform-text {
+            color: var(--bright-white) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .soulbound-text {
+            color: var(--soulbound-cyan) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .defi-text {
+            color: var(--defi-green) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .early-text {
+            color: var(--early-diamond) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .identity-text {
+            color: var(--identity-green) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .future-text {
+            color: var(--future-gold) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .nft-text {
+            color: var(--nft-white) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .unique-text {
+            color: var(--accent) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .bonuses-text {
+            color: var(--festival-pink) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .wallet-text {
+            color: var(--metamask-orange) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .mint-text {
+            color: var(--accent) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .roadmap-text {
+            color: var(--future-gold) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .discover-text {
+            color: var(--identity-green) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .explore-text, .feature-text-word, .offering-text, .offer-text, .see-text, .reward-text {
+            color: var(--future-gold) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .small-word {
+            font-weight: 700 !important;
+            display: inline-block;
+        }
+
+        /* Simplified Button Styles */
         .mint-button {
             display: inline-flex;
             align-items: center;
@@ -382,48 +281,75 @@
             border-radius: 50px;
             text-decoration: none;
             margin-top: 1.5rem;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-            transition: all 0.3s ease;
             border: 2px solid var(--bright-green);
             cursor: pointer;
-            animation: buttonGlowUpdated 2s ease-in-out infinite;
             position: relative;
             overflow: hidden;
-        }
-
-        @keyframes buttonGlowUpdated {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 30px rgba(0, 255, 0, 0.7), 0 0 40px rgba(0, 255, 0, 0.4);
-            }
+            transition: all 0.3s ease;
         }
 
         .mint-button:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 0 40px rgba(0, 255, 0, 0.8);
             background: rgba(0, 255, 0, 0.1);
         }
 
         .button-text {
             color: var(--bright-green);
             font-weight: 700;
-            text-shadow: 0 0 10px var(--bright-green), 0 0 20px var(--bright-green);
-            animation: buttonTextGlow 2s ease-in-out infinite, deltaWave 2.2s ease-in-out infinite;
             display: inline-block;
         }
 
-        @keyframes buttonTextGlow {
-            0%, 100% {
-                text-shadow: 0 0 10px var(--bright-green), 0 0 20px var(--bright-green);
-            }
-            50% {
-                text-shadow: 0 0 15px var(--bright-green), 0 0 25px var(--bright-green), 0 0 35px var(--bright-green);
-            }
+        .blockchain-text {
+            color: var(--blockchain-white) !important;
+            font-weight: 700;
+            display: inline-block;
         }
 
-        /* Enhanced Menu Bar Text */
+        .coin-text {
+            color: var(--coin-gold) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .chain-text {
+            color: var(--chain-white) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .mrz-text {
+            color: var(--mrz-cyan) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .nontransfer-text {
+            color: var(--nontransfer-green) !important;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        /* Simplified Social Links */
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--bg);
+            transform: translateY(-3px);
+        }
+
+        /* Simplified Menu Bar Text */
         .menu-link {
             display: block;
             color: var(--text);
@@ -434,20 +360,17 @@
             font-size: clamp(0.9rem, 2.5vw, 1rem);
             position: relative;
             border-bottom: 1px solid rgba(0, 240, 240, 0.1);
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
 
         .menu-link:hover {
             color: var(--accent);
             padding-left: 2rem;
-            text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
         }
 
         .menu-link.active {
             color: var(--accent);
             background: rgba(0, 240, 240, 0.15);
             border-left: 4px solid var(--accent);
-            text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
         }
 
         .menu-brand {
@@ -455,18 +378,7 @@
             font-weight: 700;
             color: var(--accent);
             font-size: clamp(1.2rem, 4vw, 1.5rem);
-            text-shadow: 0 0 10px rgba(0, 240, 240, 0.7);
-            animation: menuBrandGlow 2s ease-in-out infinite alternate, deltaWave 2.2s ease-in-out infinite;
             display: inline-block;
-        }
-
-        @keyframes menuBrandGlow {
-            from {
-                text-shadow: 0 0 10px rgba(0, 240, 240, 0.7);
-            }
-            to {
-                text-shadow: 0 0 15px rgba(0, 240, 240, 0.9), 0 0 25px rgba(0, 240, 240, 0.6);
-            }
         }
 
         /* Side Menu Bar */
@@ -543,7 +455,6 @@
         .menu-search-bar:focus-within {
             background: rgba(0, 240, 240, 0.15);
             border-color: var(--accent);
-            box-shadow: 0 0 15px rgba(0, 240, 240, 0.3);
         }
 
         .menu-search-input {
@@ -596,7 +507,6 @@
             cursor: pointer;
             z-index: 999;
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 240, 240, 0.3);
         }
 
         .menu-toggle:hover {
@@ -658,16 +568,6 @@
             border-radius: 20px;
             border: 1px solid var(--accent);
             font-size: clamp(0.6rem, 1.8vw, 0.8rem);
-            animation: badgePulse 2s ease-in-out infinite;
-        }
-
-        @keyframes badgePulse {
-            0%, 100% {
-                box-shadow: 0 0 5px rgba(0, 240, 240, 0.3);
-            }
-            50% {
-                box-shadow: 0 0 15px rgba(0, 240, 240, 0.6);
-            }
         }
 
         @keyframes slide {
@@ -706,15 +606,6 @@
             flex-wrap: wrap;
         }
         
-        @keyframes logoFloat {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-        
         .logo img {
             width: 100%;
             height: 100%;
@@ -726,7 +617,6 @@
             font-size: clamp(1.8rem, 8vw, 3.5rem);
             font-weight: 700;
             color: #00f0f0;
-            text-shadow: 0 0 20px rgba(0, 240, 240, 0.8);
             letter-spacing: 3px;
             text-align: center;
         }
@@ -738,20 +628,9 @@
             padding: clamp(1.5rem, 5vw, 3rem) clamp(1rem, 4vw, 2rem);
             margin: 2rem 0;
             text-align: center;
-            box-shadow: 0 15px 50px rgba(0, 240, 240, 0.4);
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
-            animation: containerGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes containerGlow {
-            0%, 100% {
-                box-shadow: 0 15px 50px rgba(0, 240, 240, 0.4);
-            }
-            50% {
-                box-shadow: 0 20px 60px rgba(0, 240, 240, 0.6), 0 0 80px rgba(0, 240, 240, 0.3);
-            }
         }
         
         .ad-content {
@@ -764,22 +643,12 @@
             font-family: 'Josefin Sans', sans-serif;
             font-weight: 700;
             margin-bottom: 2rem;
-            text-shadow: 0 0 20px rgba(0, 240, 240, 0.7);
             font-size: clamp(1.5rem, 6vw, 2.5rem);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 1rem;
             flex-wrap: wrap;
-        }
-        
-        @keyframes titleLogoSpin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
         }
         
         .ad-title-logo img {
@@ -805,33 +674,11 @@
             border-radius: 15px;
             border: 1px solid rgba(0, 240, 240, 0.3);
             transition: all 0.3s ease;
-            animation: featureSlideIn 0.6s ease-out;
-        }
-
-        @keyframes featureSlideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         .feature:hover {
             transform: translateX(10px) scale(1.02);
             background: rgba(0, 240, 240, 0.12);
-            box-shadow: 0 10px 30px rgba(0, 240, 240, 0.3);
-        }
-        
-        @keyframes featureLogoPulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
         }
         
         .feature-logo img {
@@ -858,16 +705,6 @@
             justify-content: center;
             gap: 1rem;
             flex-wrap: wrap;
-            animation: taglinePulse 2s ease-in-out infinite;
-        }
-
-        @keyframes taglinePulse {
-            0%, 100% {
-                background: rgba(0, 240, 240, 0.1);
-            }
-            50% {
-                background: rgba(0, 240, 240, 0.2);
-            }
         }
         
         .tagline-text {
@@ -901,34 +738,12 @@
             text-decoration: none;
             color: var(--text);
             transition: all 0.3s ease;
-            animation: cardSlideIn 0.8s ease-out;
             position: relative;
             overflow: hidden;
         }
 
-        @keyframes cardSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .quick-link-card:hover {
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(0, 240, 240, 0.4);
-        }
-
-        @keyframes logoPulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
         }
 
         .quick-link-logo img {
@@ -951,80 +766,101 @@
             line-height: 1.5;
         }
 
-        /* NEWSLETTER SECTION */
+        /* Newsletter Section Styles */
         .newsletter-section {
             background: linear-gradient(135deg, rgba(10, 17, 40, 0.95), rgba(25, 45, 85, 0.95));
-            border: 2px solid var(--accent);
-            border-radius: 25px;
-            padding: clamp(1.5rem, 5vw, 3rem) clamp(1rem, 4vw, 2rem);
+            border-top: 2px solid rgba(0, 240, 240, 0.5);
+            border-bottom: 2px solid rgba(0, 240, 240, 0.5);
+            padding: 4rem 0;
             margin: 3rem 0;
-            text-align: center;
-            box-shadow: 0 15px 50px rgba(0, 240, 240, 0.4);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
-            animation: containerGlow 3s ease-in-out infinite;
         }
 
-        .newsletter-content {
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://i.ibb.co/QjcgRzkB/mizpp.png') center/contain no-repeat;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .newsletter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+        }
+
+        .newsletter-header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
         .newsletter-title {
-            color: var(--accent);
-            font-family: 'Josefin Sans', sans-serif;
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .newsletter-text {
+            color: var(--accent) !important;
             font-weight: 700;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 20px rgba(0, 240, 240, 0.7);
-            font-size: clamp(1.5rem, 6vw, 2.2rem);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
+            display: inline-block;
         }
 
-        .newsletter-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .updated-text {
+            color: var(--future-gold) !important;
+            font-weight: 700;
+            display: inline-block;
         }
 
-        .newsletter-description {
+        .newsletter-subtitle {
             color: var(--text);
-            font-size: clamp(0.9rem, 3vw, 1.1rem);
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            max-width: 600px;
+            margin: 0 auto;
             line-height: 1.6;
-            font-weight: 700;
         }
 
-        .newsletter-description .cyan-text {
-            color: var(--accent);
+        .newsletter-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .newsletter-form-container {
+            background: rgba(0, 240, 240, 0.08);
+            border: 1px solid rgba(0, 240, 240, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
         }
 
         .newsletter-form {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            max-width: 500px;
-            margin: 0 auto;
         }
 
-        .newsletter-input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .form-group {
+            position: relative;
+            margin-bottom: 1rem;
         }
 
         .newsletter-input {
-            background: rgba(0, 240, 240, 0.1);
-            border: 1px solid rgba(0, 240, 240, 0.3);
-            border-radius: 10px;
-            padding: 1rem 1.5rem;
+            width: 100%;
+            background: rgba(10, 17, 40, 0.8);
+            border: 2px solid rgba(0, 240, 240, 0.4);
+            border-radius: 12px;
+            padding: 1.2rem 1rem 0.8rem;
             color: var(--text);
             font-family: 'Exo 2', sans-serif;
             font-size: 1rem;
@@ -1033,97 +869,137 @@
         }
 
         .newsletter-input:focus {
-            background: rgba(0, 240, 240, 0.15);
             border-color: var(--accent);
+            background: rgba(10, 17, 40, 0.9);
             box-shadow: 0 0 15px rgba(0, 240, 240, 0.3);
         }
 
-        .newsletter-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .newsletter-checkbox {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
-            margin: 1rem 0;
-            text-align: left;
-        }
-
-        .newsletter-checkbox input {
-            margin-top: 0.3rem;
-            accent-color: var(--accent);
-        }
-
-        .newsletter-checkbox label {
-            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
-            color: var(--text);
-            line-height: 1.4;
-        }
-
-        .newsletter-checkbox .cyan-text {
+        .newsletter-input:focus + .newsletter-label,
+        .newsletter-input:not(:placeholder-shown) + .newsletter-label {
+            top: 0.5rem;
+            font-size: 0.8rem;
             color: var(--accent);
-            font-weight: 700;
         }
 
-        .newsletter-checkbox a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .newsletter-checkbox a:hover {
-            text-decoration: underline;
+        .newsletter-label {
+            position: absolute;
+            top: 1.2rem;
+            left: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            background: rgba(10, 17, 40, 0.9);
+            padding: 0 0.5rem;
         }
 
         .newsletter-button {
-            background: linear-gradient(135deg, #00f0f0, #0080ff);
-            color: #0a1128;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, rgba(0, 240, 240, 0.2), rgba(0, 240, 240, 0.1));
+            color: var(--bright-green);
             font-family: 'Orbitron', monospace;
             font-weight: 700;
-            font-size: clamp(1rem, 3vw, 1.1rem);
-            padding: clamp(0.8rem, 2.5vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+            font-size: 1.1rem;
+            padding: 1.2rem 2rem;
             border-radius: 50px;
-            border: none;
+            border: 2px solid var(--bright-green);
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 240, 240, 0.5);
-            animation: buttonGlow 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            margin-top: 1rem;
         }
 
         .newsletter-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 240, 240, 0.7);
+            transform: translateY(-3px);
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
         }
 
-        .newsletter-success {
+        .newsletter-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .button-spinner {
             display: none;
-            background: rgba(0, 240, 240, 0.1);
-            border: 1px solid rgba(0, 240, 240, 0.4);
+        }
+
+        .button-spinner.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--bright-green);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .newsletter-message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .newsletter-message.success {
+            display: block;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.4);
+            color: var(--bright-green);
+        }
+
+        .newsletter-message.error {
+            display: block;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.4);
+            color: #ff6b6b;
+        }
+
+        .newsletter-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(0, 240, 240, 0.05);
             border-radius: 15px;
-            padding: 2rem;
-            margin-top: 2rem;
-            animation: taglinePulse 2s ease-in-out infinite;
+            border: 1px solid rgba(0, 240, 240, 0.2);
+            transition: all 0.3s ease;
         }
 
-        .newsletter-success h3 {
-            color: var(--accent);
-            font-family: 'Josefin Sans', sans-serif;
-            margin-bottom: 1rem;
+        .benefit-item:hover {
+            transform: translateX(10px);
+            background: rgba(0, 240, 240, 0.1);
         }
 
-        .newsletter-success p {
+        .benefit-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-text {
             color: var(--text);
-            line-height: 1.6;
-        }
-
-        @media (min-width: 768px) {
-            .newsletter-input-group {
-                flex-direction: row;
-            }
-            
-            .newsletter-input {
-                flex: 1;
-            }
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
         /* Footer */
@@ -1161,21 +1037,10 @@
             filter: brightness(0) saturate(100%);
         }
 
-        /* Enhanced Footer 2023 Text */
+        /* Footer Year Text */
         .footer-year {
             font-weight: 900 !important;
-            text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
-            animation: yearGlow 3s ease-in-out infinite, deltaWave 2.2s ease-in-out infinite;
             display: inline-block;
-        }
-        
-        @keyframes yearGlow {
-            0%, 100% {
-                text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
-            }
-            50% {
-                text-shadow: 0 0 15px var(--accent), 0 0 25px var(--accent), 0 0 35px var(--accent);
-            }
         }
         
         /* Slide Bar Logo */
@@ -1185,30 +1050,12 @@
             border-radius: 50%;
             overflow: hidden;
             border: 1px solid var(--accent);
-            box-shadow: 0 0 10px rgba(0, 240, 240, 0.8);
-            animation: logoGlowEnhanced 3s ease-in-out infinite;
         }
         
         .slide-logo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-        
-        /* Delta Wave Animation for Sepolia and ECOSYSTEM */
-        .sepolia-wave {
-            animation: deltaWave 2s ease-in-out infinite;
-            display: inline-block;
-        }
-        
-        .ecosystem-wave {
-            animation: deltaWave 2.5s ease-in-out infinite;
-            display: inline-block;
-        }
-        
-        .reward-wave, .offer-wave, .roadmap-wave, .mint-wave, .defi-wave {
-            animation: deltaWave 2.2s ease-in-out infinite;
-            display: inline-block;
         }
 
         /* Mobile Responsive */
@@ -1221,6 +1068,15 @@
         @media (max-width: 992px) {
             .feature-text {
                 font-size: 1.1rem;
+            }
+            
+            .newsletter-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .newsletter-form-container {
+                padding: 2rem;
             }
         }
 
@@ -1295,16 +1151,27 @@
                 font-size: 0.7rem;
                 padding: 0.2rem 0.6rem;
             }
-
+            
             .newsletter-section {
-                padding: 2rem 1.5rem;
+                padding: 3rem 0;
             }
-
-            .newsletter-title {
-                font-size: 1.8rem;
+            
+            .newsletter-container {
+                padding: 0 1.5rem;
             }
-
-            .newsletter-description {
+            
+            .newsletter-form-container {
+                padding: 1.5rem;
+            }
+            
+            .benefit-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+                padding: 1.2rem;
+            }
+            
+            .benefit-text {
                 font-size: 1rem;
             }
         }
@@ -1369,27 +1236,26 @@
                 top: 15px;
                 left: 15px;
             }
-
+            
             .newsletter-section {
-                padding: 1.5rem 1rem;
+                padding: 2rem 0;
             }
-
-            .newsletter-title {
-                font-size: 1.5rem;
+            
+            .newsletter-container {
+                padding: 0 1rem;
             }
-
-            .newsletter-logo {
-                width: 40px;
-                height: 40px;
+            
+            .newsletter-form-container {
+                padding: 1.2rem;
             }
-
-            .newsletter-description {
-                font-size: 0.9rem;
+            
+            .newsletter-input {
+                padding: 1rem 0.8rem 0.6rem;
             }
-
+            
             .newsletter-button {
+                padding: 1rem 1.5rem;
                 font-size: 1rem;
-                padding: 0.8rem 1.5rem;
             }
         }
 
@@ -1425,17 +1291,8 @@
                 font-size: 0.6rem;
                 padding: 0.2rem 0.5rem;
             }
-
-            .newsletter-title {
-                font-size: 1.3rem;
-            }
-
-            .newsletter-description {
-                font-size: 0.85rem;
-            }
         }
 
-        /* Extra small devices */
         @media (max-width: 320px) {
             .title {
                 font-size: 1.4rem;
@@ -1468,14 +1325,6 @@
                 font-size: 0.55rem;
                 padding: 0.15rem 0.4rem;
             }
-
-            .newsletter-title {
-                font-size: 1.1rem;
-            }
-
-            .newsletter-description {
-                font-size: 0.8rem;
-            }
         }
         
         /* Touch device optimizations */
@@ -1498,6 +1347,14 @@
             
             .menu-link:hover {
                 padding-left: 1.5rem;
+            }
+            
+            .benefit-item:hover {
+                transform: none;
+            }
+            
+            .newsletter-button:hover {
+                transform: none;
             }
         }
     </style>
@@ -1529,10 +1386,10 @@
         
         <ul class="menu-nav">
             <li><a href="index.html" class="menu-link active">Home</a></li>
-            <li><a href="mint.html" class="menu-link"><span class="mint-text mint-wave">Mint</span> <span class="soulbound-text">SBT</span></a></li>
-            <li><a href="defi.html" class="menu-link"><span class="defi-text defi-wave">DeFi</span></a></li>
-            <li><a href="ecosystem.html" class="menu-link"><span class="ecosystem-text ecosystem-wave">Ecosystem</span></a></li>
-            <li><a href="roadmap.html" class="menu-link"><span class="roadmap-text roadmap-wave">Roadmap</span></a></li>
+            <li><a href="mint.html" class="menu-link"><span class="mint-text">Mint</span> <span class="soulbound-text">SBT</span></a></li>
+            <li><a href="defi.html" class="menu-link"><span class="defi-text">DeFi</span></a></li>
+            <li><a href="ecosystem.html" class="menu-link"><span class="ecosystem-text">Ecosystem</span></a></li>
+            <li><a href="roadmap.html" class="menu-link"><span class="roadmap-text">Roadmap</span></a></li>
         </ul>
     </div>
 
@@ -1551,35 +1408,71 @@
                 <div class="slide-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
                 </div>
-                <span><span class="festival-text">🎉</span> <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="soulbound-text">SBT</span> <span class="now-on-text">NOW ON</span> <span class="sepolia-text sepolia-wave">SEPOLIA</span>! JOIN THE <span class="sepolia-text sepolia-wave">REVOLUTION</span> <span class="festival-text">🎉</span></span>
+                <span><span class="festival-text">🎉</span> <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="soulbound-text">SBT</span> <span class="now-on-text">NOW ON</span> <span class="sepolia-text">SEPOLIA</span>! JOIN THE <span class="sepolia-text">REVOLUTION</span> <span class="festival-text">🎉</span></span>
             </div>
             <div class="slide-item">
                 <span class="slide-badge">HOT</span>
                 <div class="slide-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
                 </div>
-                <span><span class="festival-text">🎉</span> LIMITED TIME <span class="offer-text offer-wave">OFFER</span> - <span class="mint-text mint-wave">MINT</span> YOUR <span class="soulbound-text">SBT</span> NOW ON <span class="sepolia-text sepolia-wave">SEPOLIA</span>! <span class="festival-text">🎉</span></span>
+                <span><span class="festival-text">🎉</span> LIMITED TIME <span class="offer-text">OFFER</span> - <span class="mint-text">MINT</span> YOUR <span class="soulbound-text">SBT</span> NOW ON <span class="sepolia-text">SEPOLIA</span>! <span class="festival-text">🎉</span></span>
             </div>
             <div class="slide-item">
                 <span class="slide-badge">UPDATE</span>
                 <div class="slide-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
                 </div>
-                <span><span class="future-text">⭐</span> EXCLUSIVE <span class="reward-text reward-wave">REWARDS</span> FOR <span class="early-text">EARLY SUPPORTERS</span> <span class="future-text">⭐</span></span>
+                <span><span class="future-text">⭐</span> EXCLUSIVE <span class="reward-text">REWARDS</span> FOR <span class="early-text">EARLY SUPPORTERS</span> <span class="future-text">⭐</span></span>
             </div>
             <div class="slide-item">
                 <span class="slide-badge">ALERT</span>
                 <div class="slide-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
                 </div>
-                <span><span class="festival-text">🎉</span> SPECIAL <span class="sepolia-text sepolia-wave">SEPOLIA</span> <span class="bonuses-text">BONUSES</span> AVAILABLE <span class="festival-text">🎉</span></span>
+                <span><span class="festival-text">🎉</span> SPECIAL <span class="sepolia-text">SEPOLIA</span> <span class="bonuses-text">BONUSES</span> AVAILABLE <span class="festival-text">🎉</span></span>
             </div>
             <div class="slide-item">
                 <span class="slide-badge">TRENDING</span>
                 <div class="slide-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
                 </div>
-                <span><span class="future-text">🔥</span> OVER 10,000 <span class="soulbound-text">SBTs</span> MINTED ON <span class="sepolia-text sepolia-wave">SEPOLIA</span>! <span class="future-text">🔥</span></span>
+                <span><span class="future-text">🔥</span> OVER 10,000 <span class="soulbound-text">SBTs</span> MINTED ON <span class="sepolia-text">SEPOLIA</span>! <span class="future-text">🔥</span></span>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="slide-item">
+                <span class="slide-badge">NEW</span>
+                <div class="slide-logo">
+                    <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
+                </div>
+                <span><span class="festival-text">🎉</span> <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="soulbound-text">SBT</span> <span class="now-on-text">NOW ON</span> <span class="sepolia-text">SEPOLIA</span>! JOIN THE <span class="sepolia-text">REVOLUTION</span> <span class="festival-text">🎉</span></span>
+            </div>
+            <div class="slide-item">
+                <span class="slide-badge">HOT</span>
+                <div class="slide-logo">
+                    <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
+                </div>
+                <span><span class="festival-text">🎉</span> LIMITED TIME <span class="offer-text">OFFER</span> - <span class="mint-text">MINT</span> YOUR <span class="soulbound-text">SBT</span> NOW ON <span class="sepolia-text">SEPOLIA</span>! <span class="festival-text">🎉</span></span>
+            </div>
+            <div class="slide-item">
+                <span class="slide-badge">UPDATE</span>
+                <div class="slide-logo">
+                    <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
+                </div>
+                <span><span class="future-text">⭐</span> EXCLUSIVE <span class="reward-text">REWARDS</span> FOR <span class="early-text">EARLY SUPPORTERS</span> <span class="future-text">⭐</span></span>
+            </div>
+            <div class="slide-item">
+                <span class="slide-badge">ALERT</span>
+                <div class="slide-logo">
+                    <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
+                </div>
+                <span><span class="festival-text">🎉</span> SPECIAL <span class="sepolia-text">SEPOLIA</span> <span class="bonuses-text">BONUSES</span> AVAILABLE <span class="festival-text">🎉</span></span>
+            </div>
+            <div class="slide-item">
+                <span class="slide-badge">TRENDING</span>
+                <div class="slide-logo">
+                    <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
+                </div>
+                <span><span class="future-text">🔥</span> OVER 10,000 <span class="soulbound-text">SBTs</span> MINTED ON <span class="sepolia-text">SEPOLIA</span>! <span class="future-text">🔥</span></span>
             </div>
         </div>
     </div>
@@ -1590,7 +1483,7 @@
             <div class="logo">
                 <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
             </div>
-            <h1 class="title"><span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text ecosystem-wave">ECOSYSTEM</span></h1>
+            <h1 class="title"><span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text">ECOSYSTEM</span></h1>
         </div>
         
         <div class="ad-container">
@@ -1599,7 +1492,7 @@
                     <div class="ad-title-logo">
                         <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
                     </div>
-                    <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="soulbound-text">SBT</span> <span class="now-on-text">NOW ON</span> <span class="sepolia-text sepolia-wave">SEPOLIA</span>
+                    <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="soulbound-text">SBT</span> <span class="now-on-text">NOW ON</span> <span class="sepolia-text">SEPOLIA</span>
                 </h3>
                 
                 <div class="features-container">
@@ -1608,7 +1501,7 @@
                             <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
                         </div>
                         <p class="feature-text">
-                            Your Digital Identity on <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text ecosystem-wave">ECOSYSTEM</span>
+                            <span class="small-word">Your</span> <span class="identity-text">Digital Identity</span> <span class="small-word">on</span> <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text">ECOSYSTEM</span>
                         </p>
                     </div>
                     
@@ -1617,7 +1510,7 @@
                             <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
                         </div>
                         <p class="feature-text">
-                            Forever Linked to Your Wallet - <span class="soulbound-text">Soulbound Token</span> of <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text ecosystem-wave">ECOSYSTEM</span>
+                            <span class="small-word">Forever</span> <span class="small-word">Linked</span> <span class="small-word">to</span> <span class="small-word">Your</span> <span class="wallet-text">Wallet</span> - <span class="soulbound-text">Soulbound Token</span> <span class="small-word">of</span> <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text">ECOSYSTEM</span>
                         </p>
                     </div>
                     
@@ -1627,7 +1520,7 @@
                             <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
                         </div>
                         <p class="feature-text">
-                            Marked as an <span class="early-text">Early Supporter</span> of <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text ecosystem-wave">ECOSYSTEM</span>
+                            <span class="small-word">Marked</span> <span class="small-word">as</span> <span class="small-word">an</span> <span class="early-text">Early Supporter</span> <span class="small-word">of</span> <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text">ECOSYSTEM</span>
                         </p>
                     </div>
                     
@@ -1636,14 +1529,14 @@
                             <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
                         </div>
                         <p class="feature-text">
-                            <span class="future-text">Future Beneficial</span> access to <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text ecosystem-wave">ECOSYSTEM</span>
+                            <span class="future-text">Future Beneficial</span> <span class="small-word">access</span> <span class="small-word">to</span> <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text">ECOSYSTEM</span>
                         </p>
                     </div>
                 </div>
                 
                 <div class="ad-tagline">
                     <p class="tagline-text">
-                        <span class="festival-text">🎉</span> <span class="sepolia-text sepolia-wave">SEPOLIA LAUNCH</span> • <span class="nontransfer-text">NON-TRANSFERABLE</span> • <span class="unique-text">UNIQUE</span> <span class="festival-text">🎉</span>
+                        <span class="festival-text">🎉</span> <span class="sepolia-text">SEPOLIA LAUNCH</span> • <span class="nontransfer-text">NON-TRANSFERABLE</span> • <span class="small-word">PERMANENT</span> • <span class="unique-text">UNIQUE</span> <span class="festival-text">🎉</span>
                     </p>
                 </div>
                 
@@ -1662,72 +1555,91 @@
                 <div class="quick-link-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="Mint SBT">
                 </div>
-                <h3 class="quick-link-title"><span class="mint-text mint-wave">MINT</span> <span class="soulbound-text">SBT</span></h3>
-                <p class="quick-link-description">Join the Sepolia launch - Get your unique Soulbound Token</p>
+                <h3 class="quick-link-title"><span class="mint-text">MINT</span> <span class="soulbound-text">SBT</span></h3>
+                <p class="quick-link-description"><span class="small-word">Join</span> <span class="small-word">the</span> <span class="sepolia-text">Sepolia launch</span> - <span class="small-word">Get</span> <span class="small-word">your</span> <span class="unique-text">unique</span> <span class="soulbound-text">Soulbound Token</span></p>
             </a>
             <a href="defi.html" class="quick-link-card">
                 <div class="quick-link-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="DeFi Platform">
                 </div>
-                <h3 class="quick-link-title"><span class="defi-text defi-wave">DeFi</span> <span class="platform-text">PLATFORM</span></h3>
-                <p class="quick-link-description">Explore decentralized finance features</p>
+                <h3 class="quick-link-title"><span class="defi-text">DeFi</span> <span class="platform-text">PLATFORM</span></h3>
+                <p class="quick-link-description"><span class="explore-text">Explore</span> <span class="defi-text">decentralized finance</span> <span class="feature-text-word">features</span></p>
             </a>
             <a href="ecosystem.html" class="quick-link-card">
                 <div class="quick-link-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="Ecosystem">
                 </div>
-                <h3 class="quick-link-title"><span class="ecosystem-text ecosystem-wave">ECOSYSTEM</span></h3>
-                <p class="quick-link-description">Discover our full platform offerings</p>
+                <h3 class="quick-link-title"><span class="ecosystem-text">ECOSYSTEM</span></h3>
+                <p class="quick-link-description"><span class="discover-text">Discover</span> <span class="small-word">our</span> <span class="small-word">full</span> <span class="platform-text">platform</span> <span class="offering-text">offerings</span></p>
             </a>
             <a href="roadmap.html" class="quick-link-card">
                 <div class="quick-link-logo">
                     <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="Roadmap">
                 </div>
-                <h3 class="quick-link-title"><span class="roadmap-text roadmap-wave">ROADMAP</span></h3>
-                <p class="quick-link-description">See our exciting future plans</p>
+                <h3 class="quick-link-title"><span class="roadmap-text">ROADMAP</span></h3>
+                <p class="quick-link-description"><span class="see-text">See</span> <span class="small-word">our</span> <span class="small-word">exciting</span> <span class="future-text">future</span> <span class="small-word">plans</span></p>
             </a>
         </div>
-
-        <!-- NEWSLETTER SECTION -->
-        <div class="newsletter-section">
-            <div class="newsletter-content">
-                <h3 class="newsletter-title">
-                    <div class="newsletter-logo">
-                        <img src="https://i.ibb.co/QjcgRzkB/mizpp.png" alt="MIRZA Logo">
-                    </div>
-                    <span class="future-text">STAY UPDATED</span>
-                </h3>
+        
+        <!-- Newsletter Section -->
+        <section class="newsletter-section">
+            <div class="newsletter-container">
+                <div class="newsletter-header">
+                    <h2 class="newsletter-title">
+                        <span class="newsletter-text">STAY</span> <span class="updated-text">UPDATED</span>
+                    </h2>
+                    <p class="newsletter-subtitle">
+                        <span class="small-word">Get</span> <span class="future-text">exclusive updates</span> <span class="small-word">on</span> <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text">ECOSYSTEM</span> <span class="small-word">developments</span>
+                    </p>
+                </div>
                 
-                <p class="newsletter-description">
-                    <strong>Join our exclusive newsletter to receive the latest updates on <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text ecosystem-wave">ECOSYSTEM</span>, <span class="soulbound-text">SBT</span> <span class="sepolia-text sepolia-wave">Sepolia launch</span>, <span class="defi-text defi-wave">DeFi</span> features, <span class="nft-text">NFT</span> collections, and upcoming releases. Be the first to know about new opportunities and special <span class="sepolia-text sepolia-wave">Sepolia</span> events!</strong>
-                </p>
-                
-                <form class="newsletter-form" id="newsletterForm">
-                    <div class="newsletter-input-group">
-                        <input type="text" class="newsletter-input" name="user_name" placeholder="Your Name" required>
-                        <input type="email" class="newsletter-input" name="user_email" placeholder="Your Email Address" required>
+                <div class="newsletter-content">
+                    <div class="newsletter-form-container">
+                        <form id="newsletter-form" class="newsletter-form">
+                            <div class="form-group">
+                                <input type="text" id="newsletter-name" name="name" class="newsletter-input" placeholder="Your Name" required>
+                                <label for="newsletter-name" class="newsletter-label">Name</label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="email" id="newsletter-email" name="email" class="newsletter-input" placeholder="Your Email" required>
+                                <label for="newsletter-email" class="newsletter-label">Email</label>
+                            </div>
+                            
+                            <button type="submit" class="newsletter-button">
+                                <span class="button-text">SUBSCRIBE NOW</span>
+                                <div class="button-spinner" id="button-spinner">
+                                    <div class="spinner"></div>
+                                </div>
+                            </button>
+                        </form>
+                        
+                        <div class="newsletter-message" id="newsletter-message"></div>
                     </div>
                     
-                    <div class="newsletter-checkbox">
-                        <input type="checkbox" id="newsletterConsent" required>
-                        <label for="newsletterConsent">
-                            I agree to receive newsletters and updates from <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text ecosystem-wave">ECOSYSTEM</span>. 
-                            I can unsubscribe at any time. 
-                            <a href="#"><span class="small-word">Privacy Policy</span></a>
-                        </label>
+                    <div class="newsletter-benefits">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🚀</div>
+                            <div class="benefit-text">
+                                <span class="small-word">Early</span> <span class="early-text">access</span> <span class="small-word">to</span> <span class="small-word">new</span> <span class="feature-text-word">features</span>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">💎</div>
+                            <div class="benefit-text">
+                                <span class="small-word">Exclusive</span> <span class="reward-text">rewards</span> <span class="small-word">for</span> <span class="small-word">subscribers</span>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon">📰</div>
+                            <div class="benefit-text">
+                                <span class="small-word">Latest</span> <span class="small-word">news</span> <span class="small-word">on</span> <span class="sepolia-text">SEPOLIA</span> <span class="small-word">updates</span>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <button type="submit" class="newsletter-button">
-                        SUBSCRIBE TO NEWSLETTER
-                    </button>
-                </form>
-                
-                <div class="newsletter-success" id="newsletterSuccess">
-                    <h3><span class="festival-text">🎉</span> THANK YOU FOR SUBSCRIBING! <span class="festival-text">🎉</span></h3>
-                    <p>Welcome to the <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text ecosystem-wave">ECOSYSTEM</span> community! You'll receive a confirmation email shortly with exclusive <span class="early-text">early access</span> content.</p>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 
     <!-- Main Footer -->
@@ -1747,19 +1659,108 @@
                     <span class="social-text">GITHUB</span>
                 </a>
             </div>
-            <p>© <span class="footer-year">2023</span> <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text ecosystem-wave">ECOSYSTEM</span> ALL RIGHTS RESERVED</p>
-            <p>BUILT FOR THE <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> COMMUNITY</p>
+            <p>© <span class="footer-year">2023</span> <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="ecosystem-text">ECOSYSTEM</span> <span class="small-word">ALL</span> <span class="small-word">RIGHTS</span> <span class="small-word">RESERVED</span></p>
+            <p><span class="small-word">BUILT</span> <span class="small-word">FOR</span> <span class="small-word">THE</span> <span class="mirza-text"><span class="mirza-first-letter">M</span>IRZA</span> <span class="small-word">COMMUNITY</span></p>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         // Initialize EmailJS with your public key
         (function() {
             emailjs.init("WUsD-SKJRnGzdX95K");
         })();
-
-        // Mobile menu toggle
-        function setupMobileMenu() {
+        
+        // Newsletter form handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const newsletterForm = document.getElementById('newsletter-form');
+            const newsletterMessage = document.getElementById('newsletter-message');
+            const buttonSpinner = document.getElementById('button-spinner');
+            
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const name = document.getElementById('newsletter-name').value;
+                const email = document.getElementById('newsletter-email').value;
+                
+                // Show loading state
+                newsletterForm.querySelector('.button-text').textContent = 'SUBSCRIBING...';
+                buttonSpinner.classList.add('active');
+                newsletterForm.querySelector('button').disabled = true;
+                
+                // Prepare template parameters
+                const templateParams = {
+                    name: name,
+                    email: email,
+                    to_email: email, // For auto-reply
+                    date: new Date().toLocaleDateString()
+                };
+                
+                // Send auto-reply to subscriber
+                emailjs.send('service_tusis6b', 'template_q97e8w1', templateParams)
+                    .then(function(response) {
+                        console.log('Auto-reply sent successfully!', response.status, response.text);
+                        
+                        // Send admin notification
+                        return emailjs.send('service_tusis6b', 'template_3s29dsf', {
+                            name: name,
+                            email: email,
+                            date: new Date().toLocaleDateString(),
+                            time: new Date().toLocaleTimeString()
+                        });
+                    })
+                    .then(function(response) {
+                        console.log('Admin notification sent successfully!', response.status, response.text);
+                        
+                        // Show success message
+                        showMessage('Thank you for subscribing! Check your email for confirmation.', 'success');
+                        
+                        // Reset form
+                        newsletterForm.reset();
+                    })
+                    .catch(function(error) {
+                        console.error('Error sending email:', error);
+                        showMessage('Sorry, there was an error. Please try again later.', 'error');
+                    })
+                    .finally(function() {
+                        // Reset button state
+                        newsletterForm.querySelector('.button-text').textContent = 'SUBSCRIBE NOW';
+                        buttonSpinner.classList.remove('active');
+                        newsletterForm.querySelector('button').disabled = false;
+                    });
+            });
+            
+            function showMessage(text, type) {
+                newsletterMessage.textContent = text;
+                newsletterMessage.className = 'newsletter-message ' + type;
+                
+                // Hide message after 5 seconds
+                setTimeout(function() {
+                    newsletterMessage.style.display = 'none';
+                }, 5000);
+            }
+            
+            // Form input animations
+            const inputs = document.querySelectorAll('.newsletter-input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+                
+                // Check if input has value on page load
+                if (input.value) {
+                    input.parentElement.classList.add('focused');
+                }
+            });
+            
+            // Mobile menu toggle
             const menuToggle = document.getElementById('menuToggle');
             const sideMenu = document.getElementById('sideMenu');
             const mainContainer = document.getElementById('mainContainer');
@@ -1791,10 +1792,8 @@
                     mainContainer.classList.remove('menu-open');
                 }
             });
-        }
-
-        // Search functionality
-        function setupSearch() {
+            
+            // Search functionality
             const searchInput = document.querySelector('.menu-search-input');
             const searchButton = document.querySelector('.menu-search-button');
             
@@ -1813,80 +1812,8 @@
                     performSearch();
                 }
             });
-        }
-
-        // Newsletter functionality with EmailJS integration
-        function setupNewsletter() {
-            const newsletterForm = document.getElementById('newsletterForm');
-            const newsletterSuccess = document.getElementById('newsletterSuccess');
             
-            newsletterForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Get form data
-                const formData = new FormData(newsletterForm);
-                const name = formData.get('user_name');
-                const email = formData.get('user_email');
-                
-                // Show loading state
-                const submitButton = newsletterForm.querySelector('.newsletter-button');
-                const originalText = submitButton.innerHTML;
-                submitButton.innerHTML = 'SUBSCRIBING...';
-                submitButton.disabled = true;
-                
-                // Send welcome email to subscriber
-                emailjs.send("service_tusis6b", "template_q97e8w1", {
-                    user_name: name,
-                    user_email: email,
-                    to_email: email,
-                    from_name: "MIRZA ECOSYSTEM",
-                    reply_to: "fahimwing@gmail.com"
-                })
-                .then(function(response) {
-                    console.log('Welcome email sent!', response.status, response.text);
-                    
-                    // Send admin notification to your email
-                    return emailjs.send("service_tusis6b", "template_3s29dsf", {
-                        user_name: name,
-                        user_email: email,
-                        to_email: "fahimwing@gmail.com",
-                        from_name: "MIRZA Newsletter System",
-                        admin_email: "fahimwing@gmail.com"
-                    });
-                })
-                .then(function(response) {
-                    console.log('Admin notification sent!', response.status, response.text);
-                    
-                    // Hide form and show success message
-                    newsletterForm.style.display = 'none';
-                    newsletterSuccess.style.display = 'block';
-                    
-                    // Reset form
-                    newsletterForm.reset();
-                    
-                    // Reset button state
-                    submitButton.innerHTML = originalText;
-                    submitButton.disabled = false;
-                    
-                    // Optional: Hide success message after a delay and show form again
-                    setTimeout(() => {
-                        newsletterForm.style.display = 'flex';
-                        newsletterSuccess.style.display = 'none';
-                    }, 8000);
-                })
-                .catch(function(error) {
-                    console.log('FAILED...', error);
-                    alert('There was an error subscribing. Please try again.');
-                    
-                    // Reset button state on error
-                    submitButton.innerHTML = originalText;
-                    submitButton.disabled = false;
-                });
-            });
-        }
-
-        // Set active navigation link
-        document.addEventListener('DOMContentLoaded', function() {
+            // Set active navigation link
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
             const navLinks = document.querySelectorAll('.menu-link');
             
@@ -1897,11 +1824,6 @@
                     link.classList.remove('active');
                 }
             });
-
-            // Initialize mobile menu and functionality
-            setupMobileMenu();
-            setupSearch();
-            setupNewsletter();
         });
     </script>
 </body>
